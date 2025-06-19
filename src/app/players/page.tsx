@@ -1,8 +1,8 @@
 import {
-  ActionIcon,
   Alert,
   Badge,
   Button,
+  ButtonGroup,
   Stack,
   Table,
   TableTbody,
@@ -11,7 +11,7 @@ import {
   TableThead,
   TableTr,
 } from "@mantine/core";
-import { User, DangerOctagon  } from "@mynaui/icons-react";
+import { User, DangerOctagon, File } from "@mynaui/icons-react";
 import Link from "next/link";
 
 interface playersResponse {
@@ -60,13 +60,22 @@ const page = () => {
         </Badge>
       </TableTd>
       <TableTd>
-        <ActionIcon
-          variant="filled"
-          component={Link}
-          href={`/players/${element.player_uid}`}
-        >
-          <User />
-        </ActionIcon>
+        <ButtonGroup>
+          <Button
+            size="compact-sm"
+            variant="outline"
+          >
+            <File/>
+          </Button>
+          <Button
+            size="compact-sm"
+            variant="filled"
+            component={Link}
+            href={`/players/${element.player_uid}`}
+          >
+            <User />
+          </Button>
+        </ButtonGroup>
       </TableTd>
     </TableTr>
   ));
