@@ -8,7 +8,8 @@ import {
   mantineHtmlProps,
 } from "@mantine/core";
 import AppLayout from "./components/Layouts/AppLayout";
-
+import '@mantine/dates/styles.css';
+import '@mantine/core/styles.css';
 export const metadata = {
   title: "My Mantine app",
   description: "I have followed setup instructions carefully",
@@ -20,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" {...mantineHtmlProps}>
+    <html lang="es" {...mantineHtmlProps}>
       <head>
         <ColorSchemeScript />
       </head>
