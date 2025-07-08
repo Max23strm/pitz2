@@ -1,3 +1,4 @@
+import { eventTypeName } from '@/interfaces/events'
 import { Badge } from '@mantine/core'
 import React from 'react'
 

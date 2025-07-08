@@ -5,7 +5,7 @@ import { eventsGeneralFetch } from '@/helpers/dataFetcher';
 import MainCalendar from './components/MainCalendar';
 import { DangerOctagon } from "@mynaui/icons-react";
 import EventsListCard from './components/EventsListCard';
-import { AnimatePresence } from "motion/react"
+import { generalEvent } from '@/interfaces/events';
 const page = async () => {
 
     const { events, errors } = await eventsGeneralFetch();
@@ -26,11 +26,9 @@ const page = async () => {
         <Container fluid >
             <Grid>
                 <GridCol span={{base:12, md:7}} className={styles.card_column}>
-                    <AnimatePresence>
-                        {
-                            events.map( (e : generalEvent) => ( <EventsListCard event={e} key={e.event_uid}/> ))
-                        }
-                    </AnimatePresence>
+                    {
+                        events.map( (e : generalEvent) => ( <EventsListCard event={e} key={e.event_uid}/> ))
+                    }
                 </GridCol>
                 <GridCol span={{base:12, md:5}}>
                     <Card shadow="xs" padding="lg" radius="md" withBorder>

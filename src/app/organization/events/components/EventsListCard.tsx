@@ -1,13 +1,13 @@
 import EventType from '@/app/components/InformationDisplay/EventType'
+import { generalEvent } from '@/interfaces/events'
 import { ActionIcon, Card, Group, Stack, Text } from '@mantine/core'
 import { ChevronRight } from '@mynaui/icons-react'
 import dayjs from 'dayjs'
-import { motion } from 'motion/react'
 import Link from 'next/link'
 
 const EventsListCard = ({event }:{event: generalEvent}) => {
     return (
-        <Card component={motion.div} initial={{opacity: 0 }} animate={{opacity:1}} shadow="xs" padding="lg" radius="md" withBorder key={event.event_uid}>
+        <Card shadow="xs" padding="lg" radius="md" withBorder key={event.event_uid}>
             <Group justify="space-between">
                 <Stack gap={1}>
                     <Group>

@@ -30,7 +30,7 @@ const playersPetition: playersResponse[] = await fetch(
 )
   .then(async (response) => {
     const newResponse = await response.json();
-    newResponse.forEach((res: any) => {
+    newResponse.forEach((res : {positions:string}) => {
       res.positions = JSON.parse(res.positions);
     });
     return newResponse;

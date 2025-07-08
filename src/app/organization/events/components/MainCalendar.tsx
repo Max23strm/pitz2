@@ -3,6 +3,7 @@
 import dayjs from 'dayjs';
 import { Indicator } from '@mantine/core';
 import { Calendar, DatesProvider } from '@mantine/dates';
+import { generalEvent } from '@/interfaces/events';
 
 const MainCalendar = ({ events }: {events:generalEvent[]}) => {
 

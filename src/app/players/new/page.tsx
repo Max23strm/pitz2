@@ -1,4 +1,4 @@
-import { Avatar, Checkbox, ComboboxData, Container, Grid, GridCol, Input, InputWrapper, MultiSelect, NativeSelect, SimpleGrid, Stack, Textarea } from '@mantine/core'
+import { Avatar, Checkbox, ComboboxData, Container, Grid, GridCol, Input, InputWrapper, MultiSelect, NativeSelect, Textarea } from '@mantine/core'
 import styles from './styles/playerDetail.module.css'
 
 const grupos_sanguineos : ComboboxData = [
