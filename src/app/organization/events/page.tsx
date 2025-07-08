@@ -8,7 +8,7 @@ import EventsListCard from './components/EventsListCard';
 import { generalEvent } from '@/interfaces/events';
 const page = async () => {
 
-    const { events, errors } = await eventsGeneralFetch();
+    const { events, errors } = await eventsGeneralFetch(); 
 
     if(errors.events) {
         return <Alert variant="light" color="red" title="Error obteniendo información" withCloseButton={false} icon={<DangerOctagon/>}>
