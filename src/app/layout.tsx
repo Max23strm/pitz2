@@ -11,7 +11,7 @@ import AppLayout from "./components/Layouts/AppLayout";
 import '@mantine/dates/styles.css';
 import '@mantine/core/styles.css';
 export const metadata = {
-  title: "My Mantine app",
+  title: "Pitz rugby club",
   description: "I have followed setup instructions carefully",
 };
 

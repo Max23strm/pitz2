@@ -69,7 +69,7 @@ const page = async () => {
       justify="center"
       gap="md"
     >
-      <Button variant="gradient" component={Link} href={"/players/new"}>
+      <Button variant="gradient" component={Link} href={"/players/new-player"}>
         Agregar jugador
       </Button>
 
@@ -88,7 +88,7 @@ const page = async () => {
       justify="center"
       gap="md"
     >
-      <Button variant="gradient" component={Link} href={"/players/new"}>
+      <Button variant="gradient" component={Link} href={"/players/new-player"}>
         Agregar jugador
       </Button>
     <section>

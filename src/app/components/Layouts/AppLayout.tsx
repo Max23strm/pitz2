@@ -9,6 +9,7 @@ import { useDisclosure } from "@mantine/hooks";
 import NavBar from "../Navigation/NavBar";
 import TopNavBar from "../Navigation/TopNavBar";
 import styles from '../Navigation/styles/TopNavBar.module.css'
+import BreadCrumbs from "../Navigation/BreadCrumbs";
 
 
 function AppLayout({ children }: { children: React.ReactNode }) {
@@ -32,7 +33,10 @@ function AppLayout({ children }: { children: React.ReactNode }) {
         <NavBar/>
       </AppShellNavbar>
 
-      <AppShellMain>{children}</AppShellMain>
+      <AppShellMain>
+        <BreadCrumbs/>
+        {children}
+      </AppShellMain>
     </AppShell>
   );
 }

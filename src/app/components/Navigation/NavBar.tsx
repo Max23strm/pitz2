@@ -25,7 +25,7 @@ function NavBar() {
       icon: <FolderTwo size={16} stroke={1.5}/>,
       href: '/administration',
       children : [
-        { name: 'Cuotas', href: '/administration/monthly-fee' },
+        { name: 'Ingresos', href: '/administration/payments' },
         { name: 'Credenciales', href: '/administration/credentials' }
       ]
     },
@@ -54,32 +54,48 @@ function NavBar() {
       return (
         <>
           {
-            nav.map( (e, i) => (
-              <NavLink
-                key={`${e.href} - ${i} - padre`}
-                component={Link}
-                color="cyan"
-                variant="subtle"
-                label={e.name}
-                href={e.href}
-                leftSection={e.icon}
-                active={ defineActive(e.href) }
-              >
-                {
-                  e.children.length && e.children.map( (child, index) => (
-                    <NavLink
-                      key={`${child.href} - ${i} - ${index}`}
-                      component={Link}
-                      color="cyan"
-                      variant="subtle"
-                      active={ defineActive(child.href) }
-                      label={child.name}
-                      href={child.href}
-                    />
-                  ) )
-                }
-              </NavLink>
-            ))
+            nav.map( (e, i) => {
+              
+              if(!e.children?.length) {
+                return (
+                  <NavLink
+                    key={`${e.href} - ${i} - padre`}
+                    component={Link}
+                    color="cyan"
+                    variant="subtle"
+                    label={e.name}
+                    href={e.href}
+                    leftSection={e.icon}
+                    active={ defineActive(e.href) }
+                  />
+                )
+              }
+              
+              return (
+                <NavLink
+                  key={`${e.href} - ${i} - padre`}
+                  color="cyan"
+                  variant="subtle"
+                  label={e.name}
+                  leftSection={e.icon}
+                  active={ defineActive(e.href) }
+                >
+                  {
+                    e.children.length && e.children.map( (child, index) => (
+                      <NavLink
+                        key={`${child.href} - ${i} - ${index}`}
+                        component={Link}
+                        color="cyan"
+                        variant="subtle"
+                        active={ defineActive(child.href) }
+                        label={child.name}
+                        href={child.href}
+                      />
+                    ) )
+                  }
+                </NavLink>
+              )
+            })
           }
         </>
       );
