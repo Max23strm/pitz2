@@ -1,5 +1,6 @@
 'use client'
 
+import styles from './styles/NavLink.module.css';
 import { NavLink } from '@mantine/core';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -63,6 +64,7 @@ function NavBar() {
                     component={Link}
                     color="cyan"
                     variant="subtle"
+                    className={styles.button}
                     label={e.name}
                     href={e.href}
                     leftSection={e.icon}
@@ -77,6 +79,7 @@ function NavBar() {
                   color="cyan"
                   variant="subtle"
                   label={e.name}
+                  className={styles.button}
                   leftSection={e.icon}
                   active={ defineActive(e.href) }
                 >
@@ -87,6 +90,7 @@ function NavBar() {
                         component={Link}
                         color="cyan"
                         variant="subtle"
+                        className={styles.button}
                         active={ defineActive(child.href) }
                         label={child.name}
                         href={child.href}
