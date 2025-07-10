@@ -1,7 +1,7 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { Breadcrumbs, Button, Text } from '@mantine/core';
+import { Breadcrumbs, Button } from '@mantine/core';
 import { ChevronRight } from "@mynaui/icons-react";
 import Link from 'next/link';
 import styles from './styles/BreadCrumbs.module.css'
@@ -26,14 +26,14 @@ const pathsandNames: Record<string, PathConfig> = {
 const BreadCrumbs = () => {
     const path = usePathname()
 
-    const items = path.split('/').splice(1).map( i =>{
+    const items = path.split('/').splice(1).map( (i, index) =>{
         if(i.length){
             const currentElem : PathConfig | null = pathsandNames[i] ?? null 
 
             if(currentElem?.href === null) {
-                return <Button color='indigo' className={styles.button} disabled variant='subtle' size="compact-sm">{currentElem.label}</Button>
+                return <Button color='indigo'  key={index + currentElem.label} className={styles.button} disabled variant='subtle' size="compact-sm">{currentElem.label}</Button>
             }
-            return <Button color='indigo' variant='subtle' component={Link} href={currentElem?.href ?? '/'} size="compact-sm">
+            return <Button key={index + ( currentElem?.href  ?? '')} color='indigo' variant='subtle' component={Link} href={currentElem?.href ?? '/'} size="compact-sm">
                 {currentElem?.label}
             </Button>
         } 
