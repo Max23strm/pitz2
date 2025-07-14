@@ -40,7 +40,7 @@ const BreadCrumbs = () => {
             }
             return <Button key={index + ( currentElem?.href  ?? '')} color='indigo' variant='subtle' component={Link} href={currentElem?.href ?? '/'} size="compact-sm">
                 {currentElem?.label}
-            </Button>
+            </Button> 
         } 
         return null
     })
