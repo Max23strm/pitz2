@@ -1,9 +1,9 @@
 "use server"
 
 import { generalEvent } from "@/interfaces/events";
-import { EventsPageProps, PaymentsPageProps, PaymentsTypesPageProps, PlayersPageProps } from "@/interfaces/fetchers";
+import { EventsPageProps, PaymentsPageProps, PaymentsTypesPageProps, PlayerDetailPageProps, PlayersPageProps } from "@/interfaces/fetchers";
 import { paymentsResponse, paymentTypesResponse } from "@/interfaces/payments";
-import { playersResponse } from "@/interfaces/players";
+import { playersDetailResponse, playersResponse } from "@/interfaces/players";
 
 export const eventsGeneralFetch = async (): Promise<EventsPageProps> => {
     let events: generalEvent[] = [];
@@ -101,6 +101,31 @@ export const paymentsGeneralFetch = async (requestedDate : string ): Promise<Pay
         errors.payments = `${err}` ;
         return {
             payments,
+            errors,
+        };
+    }
+};
+
+export const playersDetailFetch = async (requestedPlayer : string ): Promise<PlayerDetailPageProps> => {
+    let player: playersDetailResponse | null = null;
+    const errors = { player: null as string | null };
+    console.log(process.env.BASE_URL + "/api/players/" + requestedPlayer)
+    try {
+        const player_response = await Promise.resolve(
+            fetch(process.env.BASE_URL + "/api/players/" + requestedPlayer,),
+        );
+        player = (await player_response.json()) as playersDetailResponse;
+
+        return {
+            player,
+            errors,
+        };
+    
+
+    } catch (err) {
+        errors.player = `${err}` ;
+        return {
+            player,
             errors,
         };
     }

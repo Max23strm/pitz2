@@ -1,4 +1,4 @@
-import { Container, Group, Skeleton } from '@mantine/core'
+import { Container } from '@mantine/core'
 import styles from './styles/payments.module.css'
 import TableAndSelector from './components/TableAndSelector';
 

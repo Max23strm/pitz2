@@ -1,6 +1,6 @@
 import { generalEvent } from "./events";
 import { paymentsResponse, paymentTypesResponse } from "./payments";
-import { playersResponse } from "./players";
+import { playersDetailResponse, playersResponse } from "./players";
 
 export interface EventsPageProps {
   events: generalEvent[] | null;
@@ -19,6 +19,13 @@ export interface PaymentsPageProps {
   payments: paymentsResponse[] | null;
   errors: {
     payments: string | null;
+  };
+}
+
+export interface PlayerDetailPageProps {
+  player: playersDetailResponse | null;
+  errors: {
+    player: string | null;
   };
 }
 
