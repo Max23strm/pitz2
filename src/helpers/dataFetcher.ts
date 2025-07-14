@@ -71,6 +71,7 @@ export const paymentTypesFetch = async (): Promise<PaymentsTypesPageProps> => {
     
 
     } catch (err) {
+        console.log(err)
         errors.paymentTypes = `${err}` ;
         return {
             paymentTypes,

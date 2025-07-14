@@ -13,7 +13,7 @@ import BreadCrumbs from "../Navigation/BreadCrumbs";
 
 
 function AppLayout({ children }: { children: React.ReactNode }) {
-  const [opened, { toggle }] = useDisclosure();
+  const [opened, { toggle, close }] = useDisclosure();
 
   return (
     <AppShell
@@ -30,7 +30,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
       </AppShellHeader>
 
       <AppShellNavbar p="md">
-        <NavBar/>
+        <NavBar toogleClick={close}/>
       </AppShellNavbar>
 
       <AppShellMain>

@@ -5,7 +5,7 @@ import { NavLink } from '@mantine/core';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { UsersGroup, FolderKanban, FolderTwo, Home } from "@mynaui/icons-react";
-function NavBar() {
+function NavBar({toogleClick} : {toogleClick: ()=>void}) {
   const nav = [
     {
       name: 'Inicio',
@@ -66,6 +66,7 @@ function NavBar() {
                     variant="subtle"
                     className={styles.button}
                     label={e.name}
+                    onClick={toogleClick}
                     href={e.href}
                     leftSection={e.icon}
                     active={ defineActive(e.href) }
@@ -89,6 +90,7 @@ function NavBar() {
                         key={`${child.href} - ${i} - ${index}`}
                         component={Link}
                         color="cyan"
+                        onClick={toogleClick}
                         variant="subtle"
                         className={styles.button}
                         active={ defineActive(child.href) }
