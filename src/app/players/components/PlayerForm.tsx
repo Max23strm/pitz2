@@ -1,6 +1,5 @@
 "use client"
 import { Avatar, Button, Checkbox, Grid, GridCol, Group, MultiSelect, Select, Textarea, TextInput } from '@mantine/core'
-import React from 'react'
 import { grupos_sanguineos, posiciones, sexo } from '../helpers/options'
 import styles from '../new-player/styles/playerDetail.module.css'
 import { useForm } from '@mantine/form'

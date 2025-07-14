@@ -4,6 +4,7 @@ import PitzLogo from '../../../../public/images/pitz-player.png'
 import Link from 'next/link'
 import { Avatar, Burger } from '@mantine/core'
 import styles from './styles/TopNavBar.module.css'
+import ThemeSwitcher from './ThemeSwitcher'
 
 const TopNavBar = ({opened, onClick} : {opened: boolean, onClick: () => void}) => {
 
@@ -21,6 +22,7 @@ const TopNavBar = ({opened, onClick} : {opened: boolean, onClick: () => void}) =
         </Link>
 
         <div className={styles.header_group}>
+          <ThemeSwitcher/>
           <Avatar 
             color="orange"
             name={'Max Ovejak'}

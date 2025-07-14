@@ -28,7 +28,7 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider >
+        <MantineProvider defaultColorScheme="auto">
           <Notifications/>
           <AppLayout>{children}</AppLayout>
         </MantineProvider>
