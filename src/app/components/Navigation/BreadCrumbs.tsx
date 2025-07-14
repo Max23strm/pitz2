@@ -1,6 +1,6 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
+import { usePathname , useParams } from 'next/navigation'
 import { Breadcrumbs, Button } from '@mantine/core';
 import { ChevronRight } from "@mynaui/icons-react";
 import Link from 'next/link';
@@ -16,6 +16,7 @@ const pathsandNames: Record<string, PathConfig> = {
   "new-player": { label: 'Nuevo jugador', href: '/players/new-player' },
   events: { label: 'Eventos', href: '/organization/events' },
   organization: { label: 'Organización', href: null },
+  payment_uid: { label: 'Detalle de pago', href: '' },
   administration: { label: 'Administación', href: null },
   credentials: { label: 'Credenciales', href: '/administration/credentials' },
   payments: { label: 'Pagos', href: '/administration/payments' },
@@ -25,10 +26,14 @@ const pathsandNames: Record<string, PathConfig> = {
 
 const BreadCrumbs = () => {
     const path = usePathname()
-
+    const params = useParams()
     const items = path.split('/').splice(1).map( (i, index) =>{
         if(i.length){
-            const currentElem : PathConfig | null = pathsandNames[i] ?? null 
+            const defineIfParam = (currentI : string) : string => {
+                const pathElem = Object.keys(params).find(key => params[key as string] === currentI)
+                return pathElem ?? i
+            }
+            const currentElem : PathConfig | null =  pathsandNames[defineIfParam(i)] ?? null 
 
             if(currentElem?.href === null) {
                 return <Button color='indigo'  key={index + currentElem.label} className={styles.button} disabled variant='subtle' size="compact-sm">{currentElem.label}</Button>

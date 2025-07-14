@@ -1,3 +1,5 @@
+"use server"
+
 import { generalEvent } from "@/interfaces/events";
 import { EventsPageProps, PaymentsPageProps, PaymentsTypesPageProps, PlayersPageProps } from "@/interfaces/fetchers";
 import { paymentsResponse, paymentTypesResponse } from "@/interfaces/payments";
@@ -9,7 +11,7 @@ export const eventsGeneralFetch = async (): Promise<EventsPageProps> => {
     
     try {
         const events_response = await Promise.resolve(
-            fetch("http://localhost:3050/api/events"),
+            fetch(process.env.BASE_URL + '/api/' + "events"),
         );
         events = (await events_response.json()) as generalEvent[];
     } catch (err) {
@@ -33,7 +35,7 @@ export const playersGeneralFetch = async (): Promise<PlayersPageProps> => {
 
     try {
         const events_response = await Promise.resolve(
-            fetch("http://localhost:3050/api/players"),
+            fetch(process.env.BASE_URL + '/api/' + "players"),
         );
 
         players = (await events_response.json()) as playersResponse[];
@@ -58,9 +60,7 @@ export const paymentTypesFetch = async (): Promise<PaymentsTypesPageProps> => {
     const errors = { paymentTypes: null as string | null };
 
     try {
-        const events_response = await Promise.resolve(
-            fetch("http://localhost:3050/api/paymentsTypes"),
-        );
+        const events_response = await Promise.resolve(fetch(process.env.BASE_URL + '/api/' + "paymentsTypes"));
 
         paymentTypes = (await events_response.json()) as paymentTypesResponse[];
         
@@ -85,7 +85,7 @@ export const paymentsGeneralFetch = async (requestedDate : string ): Promise<Pay
 
     try {
         const events_response = await Promise.resolve(
-            fetch("http://localhost:3050/api/payments?date=" + requestedDate, {cache:'no-store'}),
+            fetch(process.env.BASE_URL + '/api/' + "payments?date=" + requestedDate, {cache:'no-store'}),
         );
 
         payments = (await events_response.json()) as paymentsResponse[];

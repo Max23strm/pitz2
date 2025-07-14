@@ -10,9 +10,11 @@ import {
 import AppLayout from "./components/Layouts/AppLayout";
 import '@mantine/dates/styles.css';
 import '@mantine/core/styles.css';
+import '@mantine/notifications/styles.css';
+import { Notifications } from '@mantine/notifications';
 export const metadata = {
   title: "Pitz rugby club",
-  description: "I have followed setup instructions carefully",
+  description: "Club de rugby Cancún",
 };
 
 export default function RootLayout({
@@ -27,6 +29,7 @@ export default function RootLayout({
       </head>
       <body>
         <MantineProvider >
+          <Notifications/>
           <AppLayout>{children}</AppLayout>
         </MantineProvider>
       </body>

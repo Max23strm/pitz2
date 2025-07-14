@@ -16,7 +16,6 @@ const TableAndSelector = () => {
     const [fetchedPayments, setfetchedPayments] = useState<{response:paymentsResponse[], error: string | null}>({response:[], error:null})
 
     const makeCAll = useCallback( async ()=>{
-
         const { payments, errors } = await paymentsGeneralFetch(value);
 
         if(errors.payments){
