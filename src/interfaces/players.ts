@@ -31,4 +31,23 @@ export interface playersDetailResponse {
   insurance_name: string | null
 }
 
+export interface playerTypeForm {
+  birth_dt: string
+  address: string | null
+  afiliation: string | null
+  blood_type: string | null
+  comments: string | null
+  credential: string | null
+  curp: string | null,
+  email: string | null,
+  emergency_number: string | null,
+  enfermedad: string | null,
+  firstName: string,
+  insurance_name: string | null,
+  insurance: boolean,
+  last_name: string,
+  phone_number: string,
+  position: string[] | null,
+  sex: "Hombre" | "Mujer" | null,
+}
 

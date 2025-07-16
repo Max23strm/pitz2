@@ -26,7 +26,6 @@ const page = async () => {
         <TableTr key={`${element.player_uid}`}>
           <TableTd>{`${element.firstName} ${element.last_name}`}</TableTd>
           <TableTd>{element.email}</TableTd>
-          <TableTd>{element.positions.join(",")}</TableTd>
           <TableTd>
             <Badge
               variant="gradient"
@@ -98,7 +97,6 @@ const page = async () => {
           <TableTr>
             <TableTh>Nombre</TableTh>
             <TableTh>Correo electrónico</TableTh>
-            <TableTh>Posiciones</TableTh>
             <TableTh>Estado</TableTh>
             <TableTh></TableTh>
           </TableTr>

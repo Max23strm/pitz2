@@ -2,6 +2,7 @@ import { Container } from '@mantine/core'
 import PlayerForm from '../components/PlayerForm'
 import { playersDetailResponse } from '@/interfaces/players'
 import dayjs from 'dayjs'
+import { postPlayerForm } from '@/helpers/dataPoster'
 
 const page = () => {
 
@@ -26,11 +27,11 @@ const page = () => {
     insurance: false,
     insurance_name: null
   }
-
+  
 
   return (
     <Container fluid>
-      <PlayerForm player_info={playerInitialValue} page='new'/>
+      <PlayerForm player_info={playerInitialValue} page='new' submitData={postPlayerForm}/>
     </Container>
   )
 }

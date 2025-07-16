@@ -4,14 +4,47 @@ import { grupos_sanguineos, posiciones, sexo } from '../helpers/options'
 import styles from '../new-player/styles/playerDetail.module.css'
 import { useForm } from '@mantine/form'
 import dayjs from 'dayjs'
-import { playersDetailResponse } from '@/interfaces/players'
+import { playersDetailResponse, playerTypeForm } from '@/interfaces/players'
 import { DatePickerInput } from '@mantine/dates'
 import utc from 'dayjs/plugin/utc';
 import Link from 'next/link'
+import { notifications } from '@mantine/notifications'
+import { useRouter } from 'next/navigation'
+
+interface formInterface{
+    player_info : playersDetailResponse, 
+    page : 'edit' | 'new', 
+    submitData:(value : playerTypeForm)=> Promise<{ isSuccess: boolean, estado?:string, error?:unknown, player_uid?: string }>
+}
 
 
-const PlayerForm = ({player_info, page} : {player_info : playersDetailResponse, page : 'edit' | 'new'}) => {
+const PlayerForm = ({player_info, page, submitData} : formInterface) => {
     dayjs.extend(utc);
+    const router = useRouter()
+    const handlePromise = async(data : playerTypeForm) => {
+
+        notifications.show({
+            title: 'Creando registro de jugador',
+            message: 'Espere un segundo por favor',
+        })
+        const response = await submitData(data)
+
+        if(response.isSuccess) {
+            notifications.show({
+                title: 'Éxito',
+                message:'Registro realizado con éxito',
+                color: 'green'
+            })
+            router.push('/players/')
+        } else {
+            notifications.show({
+                title: 'Error',
+                message:'Ocurrió un error, intente nuevamente o contate a un administrador',
+                color: 'red'
+            })
+        }
+  
+  }
 
     const form = useForm({
         mode: 'uncontrolled',
@@ -31,26 +64,28 @@ const PlayerForm = ({player_info, page} : {player_info : playersDetailResponse, 
             insurance: player_info.insurance,
             last_name: player_info.last_name,
             phone_number: player_info.phone_number,
-            positions: [],
+            position: [],
             sex: player_info.sex,
         },
         validateInputOnBlur: true,
+        validateInputOnChange:true,
         // functions will be used to validate values at corresponding key
         validate: {
             firstName: (value) => value.length < 2 ? 'Ingrese el nombre del jugador' : null,
             last_name: (value) => value.length < 1 ? 'Ingrese el apellido del jugador' : null,
             phone_number: (value) => value.length < 1 ? 'Ingrese el apellido del jugador' : null,
             email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Email invalido'),
-            birth_dt: (value) => (dayjs.isDayjs(value) ? null : 'Fecha invalida'),
+            birth_dt: (value) => (dayjs(value).isValid() ? null : 'Fecha invalida'),
         },
-        transformValues: (values) => ({
+        transformValues: (values) =>({
             ...values,
-            birth_dt:dayjs(values.birth_dt).isValid() ? values.birth_dt : dayjs()
+            birth_dt:dayjs(values.birth_dt).isValid() ? dayjs(values.birth_dt).toISOString() : dayjs().toISOString(),
+            position:values.position.length ? values.position : null
         }),
     });
-
+    // console.log(form.values)
     return (
-        <form  onSubmit={form.onSubmit(console.log)}> 
+        <form  onSubmit={form.onSubmit(handlePromise)}> 
             <Grid gutter={{base: 15}}>
                 <GridCol span={{ base: 12, md: 4 }}>
                     <Avatar className={styles.image} />
@@ -78,6 +113,7 @@ const PlayerForm = ({player_info, page} : {player_info : playersDetailResponse, 
                         <TextInput
                             className={styles.full_width}
                             radius={'md'}
+                            withAsterisk
                             label="Correo electrónico"
                             placeholder="Correo electrónico"
                             key={form.key('email')}
@@ -206,7 +242,7 @@ const PlayerForm = ({player_info, page} : {player_info : playersDetailResponse, 
                     Regresar
                 </Button>
                 <Button
-                    disabled={!form.isValid() || !form.isDirty() || form.submitting}
+                    disabled={ !form.isDirty() || form.submitting}
                     loading={form.submitting}
                     type='submit'
                 >
