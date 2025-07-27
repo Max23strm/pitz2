@@ -9,6 +9,13 @@ export interface EventsPageProps {
   };
 }
 
+export interface EventsPageProps {
+  events: generalEvent[] | null;
+  errors: {
+    events: string | null;
+  };
+}
+
 export interface PlayersPageProps {
   players: playersResponse[] | null;
   errors: {

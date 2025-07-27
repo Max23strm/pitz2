@@ -1,10 +1,8 @@
 // Import styles of packages that you've installed.
 // All packages except `@mantine/hooks` require styles imports
 import "@mantine/core/styles.css";
-
 import {
   ColorSchemeScript,
-  MantineProvider,
   mantineHtmlProps,
 } from "@mantine/core";
 import AppLayout from "./components/Layouts/AppLayout";
@@ -12,6 +10,7 @@ import '@mantine/dates/styles.css';
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
 import { Notifications } from '@mantine/notifications';
+import MantineMainProvider from "./providers/MantineMainProvider";
 export const metadata = {
   title: "Pitz rugby club",
   description: "Club de rugby Cancún",
@@ -28,10 +27,10 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider defaultColorScheme="auto">
+        <MantineMainProvider>
           <Notifications/>
           <AppLayout>{children}</AppLayout>
-        </MantineProvider>
+        </MantineMainProvider>
       </body>
     </html>
   );

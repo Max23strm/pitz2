@@ -2,8 +2,32 @@
 
 import { generalEvent } from "@/interfaces/events";
 import { EventsPageProps, PaymentsPageProps, PaymentsTypesPageProps, PlayerDetailPageProps, PlayersPageProps } from "@/interfaces/fetchers";
+import { Fetch, HomeResponse } from "@/interfaces/home";
 import { paymentsResponse, paymentTypesResponse } from "@/interfaces/payments";
 import { playersDetailResponse, playersResponse } from "@/interfaces/players";
+
+export const homeFetch = async (requestedDate : string ): Promise<HomeResponse> => {
+    let data: Fetch = {} as Fetch
+    const errors = { home: null as string | null };
+
+    try {
+        const events_response = await fetch(process.env.BASE_URL + '/api/home?date=' + requestedDate, { cache: 'no-store' });
+        data = (await events_response.json()) as Fetch;
+    } catch (err) {
+        errors.home = `${err}`;
+        return {
+            data:data.data,
+            isSuccess: data?.isSuccess ?? false,  // safe access if data is undefined
+            errors,
+        };
+    }
+
+    return {
+        data:data.data,
+        isSuccess: data.isSuccess,
+        errors,
+    };
+};
 
 export const eventsGeneralFetch = async (): Promise<EventsPageProps> => {
     let events: generalEvent[] = [];
