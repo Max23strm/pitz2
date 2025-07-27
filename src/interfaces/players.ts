@@ -25,7 +25,7 @@ export interface playersDetailResponse {
   player_uid: string;
   positions: string[] | null;
   sex: "Hombre" | "Mujer" | null,
-  status: number;
+  status: string;
   emergency_number: string,
   insurance: boolean,
   insurance_name: string | null
@@ -46,8 +46,35 @@ export interface playerTypeForm {
   insurance_name: string | null,
   insurance: boolean,
   last_name: string,
+  status: string,
   phone_number: string,
   position: string[] | null,
   sex: "Hombre" | "Mujer" | null,
+}
+
+export type playerTypeFormWithStatusAsString = playerTypeForm & {
+  status: number;
+}
+
+export interface putPlayersOptions {
+  player_uid : string | null,
+  birth_dt?: string | null
+  address?: string | null
+  afiliation?: string | null
+  blood_type?: string | null
+  comments?: string | null
+  credential?: string | null
+  curp?: string | null,
+  email?: string | null,
+  emergency_number?: string | null,
+  enfermedad?: string | null,
+  firstName?: string | null,
+  insurance_name?: string | null,
+  insurance?: boolean | null,
+  last_name?: string | null,
+  phone_number?: string,
+  status?: number | null,
+  position?: string[] | null,
+  sex?: "Hombre" | "Mujer" | null,
 }
 

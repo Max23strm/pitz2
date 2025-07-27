@@ -71,7 +71,6 @@ export const paymentTypesFetch = async (): Promise<PaymentsTypesPageProps> => {
     
 
     } catch (err) {
-        console.log(err)
         errors.paymentTypes = `${err}` ;
         return {
             paymentTypes,
@@ -109,13 +108,13 @@ export const paymentsGeneralFetch = async (requestedDate : string ): Promise<Pay
 export const playersDetailFetch = async (requestedPlayer : string ): Promise<PlayerDetailPageProps> => {
     let player: playersDetailResponse | null = null;
     const errors = { player: null as string | null };
-    console.log(process.env.BASE_URL + "/api/players/" + requestedPlayer)
+
     try {
         const player_response = await Promise.resolve(
             fetch(process.env.BASE_URL + "/api/players/" + requestedPlayer,),
         );
         player = (await player_response.json()) as playersDetailResponse;
-
+        player.status = `${player.status}`
         return {
             player,
             errors,

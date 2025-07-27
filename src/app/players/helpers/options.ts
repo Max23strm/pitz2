@@ -8,6 +8,10 @@ export const grupos_sanguineos : {label: string, value: string}[] = [
   { label: 'O-', value: 'O-' },
   { label: 'B-', value: 'B-' },
 ]
+export const estados : {label: string, value: string}[] = [
+  { label: 'Activo', value: "1" },
+  { label: 'Inactivo', value: "0" },
+]
 
 export const posiciones : {label: string, value: string}[]  = [
   { label: 'Pilar Izquierdo', value: '1' },

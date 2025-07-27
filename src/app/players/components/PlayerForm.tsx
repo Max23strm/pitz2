@@ -1,35 +1,42 @@
 "use client"
-import { Avatar, Button, Checkbox, Grid, GridCol, Group, MultiSelect, Select, Textarea, TextInput } from '@mantine/core'
-import { grupos_sanguineos, posiciones, sexo } from '../helpers/options'
+import { Avatar, Button, Checkbox, Grid, GridCol, Group, Select, SelectProps, Textarea, TextInput } from '@mantine/core'
+import { estados, grupos_sanguineos, sexo } from '../helpers/options'
 import styles from '../new-player/styles/playerDetail.module.css'
 import { useForm } from '@mantine/form'
 import dayjs from 'dayjs'
-import { playersDetailResponse, playerTypeForm } from '@/interfaces/players'
+import { playersDetailResponse, playerTypeForm, putPlayersOptions } from '@/interfaces/players'
 import { DatePickerInput } from '@mantine/dates'
 import utc from 'dayjs/plugin/utc';
 import Link from 'next/link'
 import { notifications } from '@mantine/notifications'
 import { useRouter } from 'next/navigation'
+import { putPlayerForm } from '@/helpers/dataPutter'
+import { postPlayerForm } from '@/helpers/dataPoster'
+import PlayerStatusBadge from './PlayerStatusBadge'
 
-interface formInterface{
-    player_info : playersDetailResponse, 
-    page : 'edit' | 'new', 
-    submitData:(value : playerTypeForm)=> Promise<{ isSuccess: boolean, estado?:string, error?:unknown, player_uid?: string }>
+
+
+type Response = { isSuccess: boolean; estado?: string; error?: unknown; player_uid?: string }
+
+interface FormEditInterface {
+  player_info: playersDetailResponse;
+  page: 'edit';
+  player_uid: string;
 }
 
+interface FormNewInterface {
+  player_info: playersDetailResponse;
+  page: 'new';
+  player_uid?: string
+}
 
-const PlayerForm = ({player_info, page, submitData} : formInterface) => {
+type formInterface = FormEditInterface | FormNewInterface;
+
+const PlayerForm = ({player_info, page, player_uid} : formInterface) => {
     dayjs.extend(utc);
     const router = useRouter()
-    const handlePromise = async(data : playerTypeForm) => {
-
-        notifications.show({
-            title: 'Creando registro de jugador',
-            message: 'Espere un segundo por favor',
-        })
-        const response = await submitData(data)
-
-        if(response.isSuccess) {
+    const hanleResponse = (res : Response) => {
+        if(res.isSuccess) {
             notifications.show({
                 title: 'Éxito',
                 message:'Registro realizado con éxito',
@@ -43,9 +50,40 @@ const PlayerForm = ({player_info, page, submitData} : formInterface) => {
                 color: 'red'
             })
         }
+    }
+    const handlePromise = async(data : playerTypeForm) => {
+
+        if (page === 'new') {
+            notifications.show({
+                title: 'Creando registro de jugador',
+                message: 'Espere un segundo por favor',
+            })
+            const response = await postPlayerForm(data as playerTypeForm);
+            hanleResponse(response)
+        } else {
+            notifications.show({
+                title: 'Editando registro de jugador',
+                message: 'Espere un segundo por favor',
+            })
+
+            const dataToSend : Partial<putPlayersOptions> = {}
+            const keys = Object.keys(form.getDirty()) as (keyof Partial<putPlayersOptions>)[];
+            
+            keys.forEach((key) => {
+                const value : string | string[] | boolean | null = data[key as keyof playerTypeForm]
+                if (key === 'status') {
+                    dataToSend[key] = value === '1' ? 1 : 0;
+                } else {
+                    Object.assign(dataToSend, {[key] : value})
+                }
+            });
+
+            const response = await putPlayerForm({...dataToSend, player_uid} as putPlayersOptions);
+            hanleResponse(response)
+
+        }
   
   }
-
     const form = useForm({
         mode: 'uncontrolled',
         initialValues: { 
@@ -62,6 +100,7 @@ const PlayerForm = ({player_info, page, submitData} : formInterface) => {
             firstName: player_info.firstName,
             insurance_name: player_info.insurance_name,
             insurance: player_info.insurance,
+            status: player_info.status,
             last_name: player_info.last_name,
             phone_number: player_info.phone_number,
             position: [],
@@ -73,7 +112,7 @@ const PlayerForm = ({player_info, page, submitData} : formInterface) => {
         validate: {
             firstName: (value) => value.length < 2 ? 'Ingrese el nombre del jugador' : null,
             last_name: (value) => value.length < 1 ? 'Ingrese el apellido del jugador' : null,
-            phone_number: (value) => value.length < 1 ? 'Ingrese el apellido del jugador' : null,
+            phone_number: (value) => value.length < 1 ? 'Ingrese un teléfono válido' : null,
             email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Email invalido'),
             birth_dt: (value) => (dayjs(value).isValid() ? null : 'Fecha invalida'),
         },
@@ -83,7 +122,12 @@ const PlayerForm = ({player_info, page, submitData} : formInterface) => {
             position:values.position.length ? values.position : null
         }),
     });
-    // console.log(form.values)
+    const renderSelectOption: SelectProps['renderOption'] = ({ option }) => (
+        <Group flex="1" gap="xs">
+            <PlayerStatusBadge status={parseInt(option.value)}/>
+        </Group>
+    );
+
     return (
         <form  onSubmit={form.onSubmit(handlePromise)}> 
             <Grid gutter={{base: 15}}>
@@ -137,7 +181,7 @@ const PlayerForm = ({player_info, page, submitData} : formInterface) => {
                             placeholder="Dirección"
                             key={form.key('address')}
                             {...form.getInputProps('address')}
-                        />
+                            />
                         <DatePickerInput
                             radius={'md'}
                             withAsterisk
@@ -159,6 +203,17 @@ const PlayerForm = ({player_info, page, submitData} : formInterface) => {
                             placeholder="Selecciona un género"
                             key={form.key('sex')}
                             {...form.getInputProps('sex')}
+                        />
+                        <Select
+                            className={styles.full_width}
+                            radius={'md'}
+                            withAsterisk
+                            label="Estado"
+                            data={estados}
+                            placeholder="Selecciona un estado"
+                            key={form.key('status')}
+                            renderOption={renderSelectOption}
+                            {...form.getInputProps('status')}
                         />
                         <Select
                             className={styles.full_width}
@@ -215,13 +270,13 @@ const PlayerForm = ({player_info, page, submitData} : formInterface) => {
                         {...form.getInputProps('curp')}
                     />
                     
-                    <MultiSelect
+                    {/* <MultiSelect
                         label="Posición"
                         radius="md"
                         data={posiciones}
                         key={form.key('position')}
                         {...form.getInputProps('position')}
-                    />
+                    /> */}
                     <Textarea
                         className={styles.full_width}
                         radius={'md'}

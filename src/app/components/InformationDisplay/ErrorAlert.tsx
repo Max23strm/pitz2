@@ -2,7 +2,6 @@ import { Alert } from '@mantine/core'
 import { DangerOctagon } from '@mynaui/icons-react'
 
 const ErrorAlert = ({errorMessage} : {errorMessage: string | null}) => {
-    // console.log(errorMessage)
     if(!Boolean(errorMessage)) return
 
     return (
