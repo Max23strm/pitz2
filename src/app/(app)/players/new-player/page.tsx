@@ -1,7 +1,7 @@
 import { Container } from '@mantine/core'
 import PlayerForm from '../components/PlayerForm'
 import { playersDetailResponse } from '@/interfaces/players'
-import dayjs from 'dayjs'
+import dayjs from '@/helpers/dayjs'
 
 const page = () => {
 

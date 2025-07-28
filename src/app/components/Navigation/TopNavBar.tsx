@@ -12,7 +12,7 @@ const TopNavBar = ({opened, onClick} : {opened: boolean, onClick: () => void}) =
     <>
         <Burger opened={opened} onClick={onClick} hiddenFrom="sm" size="md" className={styles.menu_button}/>
       
-        <Link href={'/'}>
+        <Link href={'/home'}>
             <Image
                 src={PitzLogo}
                 width={50}

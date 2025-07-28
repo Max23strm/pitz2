@@ -1,8 +1,8 @@
 import { homeFetch } from "@/helpers/dataFetcher";
 import { Alert, Container, Grid, GridCol } from "@mantine/core";
 import { DangerOctagon } from "@mynaui/icons-react";
-import dayjs from "dayjs";
-import StandardCard from "./components/homeComponents/StandardCard";
+import dayjs from '@/helpers/dayjs'
+import StandardCard from "../../components/homeComponents/StandardCard";
 
 export default async function Home() {
   const { data, errors, isSuccess } = await homeFetch(

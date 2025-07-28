@@ -2,7 +2,7 @@ import EventType from '@/app/components/InformationDisplay/EventType'
 import { generalEvent } from '@/interfaces/events'
 import { ActionIcon, Card, Group, Stack, Text } from '@mantine/core'
 import { ChevronRight } from '@mynaui/icons-react'
-import dayjs from 'dayjs'
+import dayjs from '@/helpers/dayjs'
 import Link from 'next/link'
 
 const EventsListCard = ({event }:{event: generalEvent}) => {

@@ -5,7 +5,6 @@ import {
   ColorSchemeScript,
   mantineHtmlProps,
 } from "@mantine/core";
-import AppLayout from "./components/Layouts/AppLayout";
 import '@mantine/dates/styles.css';
 import '@mantine/core/styles.css';
 import '@mantine/notifications/styles.css';
@@ -29,7 +28,7 @@ export default function RootLayout({
       <body>
         <MantineMainProvider>
           <Notifications/>
-          <AppLayout>{children}</AppLayout>
+          {children}
         </MantineMainProvider>
       </body>
     </html>

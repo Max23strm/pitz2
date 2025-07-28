@@ -1,7 +1,8 @@
+import { formatCurrency } from '@/helpers/numberFormaters';
 import { UpcomingEvent } from '@/interfaces/home'
 import { Card, Group, Stack, Text } from '@mantine/core'
 import { CalendarCheck, Dollar,  UsersGroup } from "@mynaui/icons-react";
-import dayjs from 'dayjs';
+import dayjs from '@/helpers/dayjs'
 
 import Link from 'next/link'
 
@@ -69,7 +70,7 @@ const StandardCard = ({ type, data }: Props) => {
                     <Stack >
                         <Text  fw={700} size="lg" >Recaudados este mes</Text>
                         <Stack gap={'sm'}>
-                            <Text size="lg" >{data}</Text>
+                            <Text size="lg" >{formatCurrency(data)}</Text>
                         </Stack>
                     </Stack>
                     <Dollar size={'80px'} color='#0C5C7A'/>

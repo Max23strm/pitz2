@@ -1,6 +1,6 @@
 'use client'
 
-import dayjs from 'dayjs';
+import dayjs from '@/helpers/dayjs'
 import { Indicator } from '@mantine/core';
 import { Calendar, DatesProvider } from '@mantine/dates';
 import { generalEvent } from '@/interfaces/events';

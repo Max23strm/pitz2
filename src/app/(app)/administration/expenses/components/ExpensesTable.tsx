@@ -3,24 +3,23 @@ import { formatCurrency } from '@/helpers/numberFormaters';
 import { paymentsResponse } from '@/interfaces/payments';
 import { FileText } from "@mynaui/icons-react";
 import { ActionIcon, Table, TableTbody, TableTd, TableTh, TableThead, TableTr } from '@mantine/core';
-import dayjs from 'dayjs';
+import dayjs from '@/helpers/dayjs'
 import Link from 'next/link';
 import { JSX } from 'react'
 
-const PaymentsTable = ({payments} : {payments: paymentsResponse[]}) => {
+const ExpensesTable = ({payments} : {payments: paymentsResponse[]}) => {
 
     let rows : JSX.Element[] = []
     if(payments?.length) {
         rows = payments.map((element : paymentsResponse) => (
             <TableTr key={`${element.payment_uid}`}>
                 <TableTd>{dayjs(element.date).format('DD-MMM-YYYY')}</TableTd>
-                <TableTd>{`${element.player_name}`}</TableTd>
                 <TableTd> {element.payment_name} </TableTd>
                 <TableTd>{formatCurrency(element.amount)}</TableTd>
                 <TableTd>
                     <ActionIcon
                         component={Link}                    
-                        href={'payments/' + element.payment_uid}
+                        href={'expenses/' + element.payment_uid}
                         variant='subtle'
                     >
                         <FileText/>
@@ -35,9 +34,8 @@ const PaymentsTable = ({payments} : {payments: paymentsResponse[]}) => {
             <Table stickyHeader stickyHeaderOffset={60} highlightOnHover>
                 <TableThead>
                 <TableTr>
-                    <TableTh>Fecha de ingreso</TableTh>
-                    <TableTh>Nombre</TableTh>
-                    <TableTh>Tipo</TableTh>
+                    <TableTh>Fecha</TableTh>
+                    <TableTh>Tipo de gasto</TableTh>
                     <TableTh>Monto</TableTh>
                 </TableTr>
                 </TableThead>
@@ -48,4 +46,4 @@ const PaymentsTable = ({payments} : {payments: paymentsResponse[]}) => {
     )
 }
 
-export default PaymentsTable
+export default ExpensesTable

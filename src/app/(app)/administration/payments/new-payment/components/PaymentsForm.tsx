@@ -8,11 +8,11 @@ import { paymentTypesResponse } from '@/interfaces/payments'
 import { PaymentsTypesPageProps, PlayersPageProps } from '@/interfaces/fetchers'
 import Link from 'next/link'
 import { useForm } from '@mantine/form'
-import dayjs from 'dayjs'
+import dayjs from '@/helpers/dayjs'
 import { postPaymentForm } from '@/helpers/dataPoster'
 import { notifications } from '@mantine/notifications';
 import { useRouter } from 'next/navigation'
-
+import { DatesProvider } from '@mantine/dates';
 
 type optionsForm = {
     playersResponse: PlayersPageProps,
@@ -106,15 +106,17 @@ const PaymentsForm = ({formOptions} : {formOptions: optionsForm}) => {
                 />
             </Fieldset>
             <Fieldset className={styles.fieldSet}>
-                <DatePickerInput
-                    radius={'md'}
-                    withAsterisk
-                    label="Fecha de ingreso"
-                    placeholder="Selecciones la fecha de ingreso"
-                    className={styles.fullWidthElement}
-                    key={form.key('date')}
-                    {...form.getInputProps('date')}
-                />
+                <DatesProvider settings={{locale:'es-mx'}}>
+                    <DatePickerInput
+                        radius={'md'}
+                        withAsterisk
+                        label="Fecha de ingreso"
+                        placeholder="Selecciones la fecha de ingreso"
+                        className={styles.fullWidthElement}
+                        key={form.key('date')}
+                        {...form.getInputProps('date')}
+                    />
+                </DatesProvider>
 
                 <Select
                     className={styles.fullWidthElement}

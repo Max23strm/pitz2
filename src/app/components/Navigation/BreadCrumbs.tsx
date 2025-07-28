@@ -15,6 +15,7 @@ const pathsandNames: Record<string, PathConfig> = {
   players: { label: 'Jugadores', href: '/players' },
   "new-player": { label: 'Nuevo jugador', href: '/players/new-player' },
   events: { label: 'Eventos', href: '/organization/events' },
+  expenses: { label: 'Gastos', href: '/administration/expenses' },
   organization: { label: 'Organización', href: null },
   payment_uid: { label: 'Detalle de pago', href: '' },
   administration: { label: 'Administación', href: null },
@@ -27,7 +28,7 @@ const pathsandNames: Record<string, PathConfig> = {
 const BreadCrumbs = () => {
     const path = usePathname()
     const params = useParams()
-    const items = path.split('/').splice(1).map( (i, index) =>{
+    const items = path.split('/home').splice(1).map( (i, index) =>{
         if(i.length){
             const defineIfParam = (currentI : string) : string => {
                 const pathElem = Object.keys(params).find(key => params[key as string] === currentI)
@@ -50,7 +51,7 @@ const BreadCrumbs = () => {
             className={styles.mainContainer}
             separator={<ChevronRight size={16}/>}
         >
-            <Button color='indigo' component={Link} variant='subtle'  href={'/'} size="compact-sm">
+            <Button color='indigo' component={Link} variant='subtle'  href={'/home'} size="compact-sm">
                 Inicio
             </Button>
             {items}

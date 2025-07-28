@@ -3,9 +3,9 @@ import { Avatar, Button, Checkbox, Grid, GridCol, Group, Select, SelectProps, Te
 import { estados, grupos_sanguineos, sexo } from '../helpers/options'
 import styles from '../new-player/styles/playerDetail.module.css'
 import { useForm } from '@mantine/form'
-import dayjs from 'dayjs'
+import dayjs from '@/helpers/dayjs'
 import { playersDetailResponse, playerTypeForm, putPlayersOptions } from '@/interfaces/players'
-import { DatePickerInput } from '@mantine/dates'
+import { DatePickerInput, DatesProvider } from '@mantine/dates'
 import utc from 'dayjs/plugin/utc';
 import Link from 'next/link'
 import { notifications } from '@mantine/notifications'
@@ -13,8 +13,6 @@ import { useRouter } from 'next/navigation'
 import { putPlayerForm } from '@/helpers/dataPutter'
 import { postPlayerForm } from '@/helpers/dataPoster'
 import PlayerStatusBadge from './PlayerStatusBadge'
-
-
 
 type Response = { isSuccess: boolean; estado?: string; error?: unknown; player_uid?: string }
 
@@ -182,14 +180,16 @@ const PlayerForm = ({player_info, page, player_uid} : formInterface) => {
                             key={form.key('address')}
                             {...form.getInputProps('address')}
                             />
-                        <DatePickerInput
-                            radius={'md'}
-                            withAsterisk
-                            label="Fecha de nacimiento"
-                            className={styles.full_width}
-                            key={form.key('birth_dt')}
-                            {...form.getInputProps('birth_dt')}
-                        />
+                        <DatesProvider settings={{ locale: 'es', firstDayOfWeek: 1, weekendDays: [0],  }}>
+                            <DatePickerInput
+                                radius={'md'}
+                                withAsterisk
+                                label="Fecha de nacimiento"
+                                className={styles.full_width}
+                                key={form.key('birth_dt')}
+                                {...form.getInputProps('birth_dt')}
+                            />
+                        </DatesProvider>
                     </GridCol>
                 </GridCol>
                 <GridCol span={{ base: 12 }} className={styles.form_section}>

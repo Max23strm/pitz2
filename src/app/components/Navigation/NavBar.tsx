@@ -9,7 +9,7 @@ function NavBar({toogleClick} : {toogleClick: ()=>void}) {
   const nav = [
     {
       name: 'Inicio',
-      href: '/',
+      href: '/home',
       icon: <Home size={16} stroke={1.5}/>,
       children : []
     },
@@ -27,6 +27,7 @@ function NavBar({toogleClick} : {toogleClick: ()=>void}) {
       href: '/administration',
       children : [
         { name: 'Ingresos', href: '/administration/payments' },
+        { name: 'Gastos', href: '/administration/expenses' },
         { name: 'Credenciales', href: '/administration/credentials' }
       ]
     },

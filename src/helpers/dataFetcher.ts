@@ -59,7 +59,7 @@ export const playersGeneralFetch = async (): Promise<PlayersPageProps> => {
 
     try {
         const events_response = await Promise.resolve(
-            fetch(process.env.BASE_URL + '/api/' + "players"),
+            fetch(process.env.BASE_URL + '/api/' + "players", {cache:'no-store'}),
         );
 
         players = (await events_response.json()) as playersResponse[];
