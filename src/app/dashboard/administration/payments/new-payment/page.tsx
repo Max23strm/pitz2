@@ -40,7 +40,7 @@ const page = async () => {
 
         return { playersResponse, paymentsResponse }
     });
-    console.log(formOptions)
+
     return (
         <Container>
             <ShowAlerts formOptions={formOptions}/>
