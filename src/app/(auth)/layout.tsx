@@ -5,7 +5,7 @@ import { Paper } from '@mantine/core'
 const layout = ({children} : { children: ReactNode }) => {
     return (
         <div className={styles.login_container}>
-            <Paper className={styles.form_section}>
+            <Paper className={styles.form_section} radius={'xl'}>
                 {children}
             </Paper>
             <div className={styles.wrapper}>

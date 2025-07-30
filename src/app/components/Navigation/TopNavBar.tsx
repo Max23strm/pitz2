@@ -2,9 +2,10 @@ import Image from 'next/image'
 import React from 'react'
 import PitzLogo from '../../../../public/images/pitz-player.png'
 import Link from 'next/link'
-import { Avatar, Burger } from '@mantine/core'
+import { Burger } from '@mantine/core'
 import styles from './styles/TopNavBar.module.css'
 import ThemeSwitcher from './ThemeSwitcher'
+import UserAvatar from './UserAvatar'
 
 const TopNavBar = ({opened, onClick} : {opened: boolean, onClick: () => void}) => {
 
@@ -12,7 +13,7 @@ const TopNavBar = ({opened, onClick} : {opened: boolean, onClick: () => void}) =
     <>
         <Burger opened={opened} onClick={onClick} hiddenFrom="sm" size="md" className={styles.menu_button}/>
       
-        <Link href={'/home'}>
+        <Link href={'/dashboard/home'}>
             <Image
                 src={PitzLogo}
                 width={50}
@@ -23,12 +24,7 @@ const TopNavBar = ({opened, onClick} : {opened: boolean, onClick: () => void}) =
 
         <div className={styles.header_group}>
           <ThemeSwitcher/>
-          <Avatar 
-            color="orange"
-            name={'Max Ovejak'}
-            alt='Max Ovejak'
-            variant='outline'
-          />
+          <UserAvatar/>
         </div>
     </>
   )

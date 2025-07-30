@@ -1,11 +1,19 @@
 
+
 export interface playersResponse {
+  estado: string, 
+  isSuccess: boolean,
+  mensaje?: string,
+  data?: playersData[]
+}
+export interface playersData {
   player_uid: string;
   firstName: string;
   last_name: string;
   email: string;
   status: number;
   positions: string[];
+  
 }
 
 

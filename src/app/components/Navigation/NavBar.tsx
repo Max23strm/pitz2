@@ -9,36 +9,36 @@ function NavBar({toogleClick} : {toogleClick: ()=>void}) {
   const nav = [
     {
       name: 'Inicio',
-      href: '/home',
+      href: '/dashboard/home',
       icon: <Home size={16} stroke={1.5}/>,
       children : []
     },
     {
       name: 'Jugadores',
       icon: <UsersGroup size={16} stroke={1.5}/>,
-      href: '/players',
+      href: '/dashboard/players',
       children : [
-        { name: 'Todos', href: '/players' }
+        { name: 'Todos', href: '/dashboard/players' }
       ]
     },
     {
       name: 'Administración',
       icon: <FolderTwo size={16} stroke={1.5}/>,
-      href: '/administration',
+      href: '/dashboard/administration',
       children : [
-        { name: 'Ingresos', href: '/administration/payments' },
-        { name: 'Gastos', href: '/administration/expenses' },
-        { name: 'Credenciales', href: '/administration/credentials' }
+        { name: 'Ingresos', href: '/dashboard/administration/payments' },
+        { name: 'Gastos', href: '/dashboard/administration/expenses' },
+        { name: 'Credenciales', href: '/dashboard/administration/credentials' }
       ]
     },
     {
       name: 'Organización',
       icon: <FolderKanban size={16} stroke={1.5}/>,
-      href: '/organization',
+      href: '/dashboard/organization',
       children : [
-        { name: "Calendarios", href: '/organization/events' },
-        { name: "Partidos", href: '/organization/matches' },
-        { name: "Entrenamientos", href: '/organization/trainings' }
+        { name: "Calendarios", href: '/dashboard/organization/events' },
+        { name: "Partidos", href: '/dashboard/organization/matches' },
+        { name: "Entrenamientos", href: '/dashboard/organization/trainings' }
       ]
     },
   ]

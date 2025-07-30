@@ -29,7 +29,7 @@ const StandardCard = ({ type, data }: Props) => {
                 radius="lg" withBorder
                 padding="xl"
                 component={Link}
-                href="/organization/events"
+                href="/dashboard/organization/events"
             >
                 <Text>Sin eventos programados</Text>
             </Card>
@@ -41,7 +41,7 @@ const StandardCard = ({ type, data }: Props) => {
                 radius="lg" withBorder
                 padding="xl"
                 component={Link}
-                href={`/organization/events/${event_uid}`}
+                href={`/dashboard/organization/events/${event_uid}`}
             >
                 <Group justify='space-between'>
                     <Stack >
@@ -64,7 +64,7 @@ const StandardCard = ({ type, data }: Props) => {
                 radius="lg" withBorder
                 padding="xl"
                 component={Link}
-                href={`/administration/payments`}
+                href={`/dashboard/administration/payments`}
             >
                 <Group justify='space-between'>
                     <Stack >
@@ -85,7 +85,7 @@ const StandardCard = ({ type, data }: Props) => {
                 radius="lg" withBorder
                 padding="xl"
                 component={Link}
-                href={`/players`}
+                href={`/dashboard/players`}
             >
                 <Group justify='space-between'>
                     <Stack >

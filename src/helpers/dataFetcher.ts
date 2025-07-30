@@ -1,10 +1,11 @@
 "use server"
 
 import { generalEvent } from "@/interfaces/events";
-import { EventsPageProps, PaymentsPageProps, PaymentsTypesPageProps, PlayerDetailPageProps, PlayersPageProps } from "@/interfaces/fetchers";
+import { EventsPageProps, PaymentsPageProps, PaymentsTypesPageProps, PlayerDetailPageProps, PlayersPageProps, UserResponse } from "@/interfaces/fetchers";
 import { Fetch, HomeResponse } from "@/interfaces/home";
 import { paymentsResponse, paymentTypesResponse } from "@/interfaces/payments";
-import { playersDetailResponse, playersResponse } from "@/interfaces/players";
+import { playersData, playersDetailResponse, playersResponse } from "@/interfaces/players";
+import { cookies } from 'next/headers'
 
 export const homeFetch = async (requestedDate : string ): Promise<HomeResponse> => {
     let data: Fetch = {} as Fetch
@@ -54,51 +55,66 @@ export const eventsGeneralFetch = async (): Promise<EventsPageProps> => {
 
 
 export const playersGeneralFetch = async (): Promise<PlayersPageProps> => {
-    let players: playersResponse[] = [];
-    const errors = { players: null as string | null };
-
+    let players: playersData[] = [];
+    const cookieStore = await cookies()
+    const authToken = cookieStore.get('authToken')
     try {
-        const events_response = await Promise.resolve(
-            fetch(process.env.BASE_URL + '/api/' + "players", {cache:'no-store'}),
+        const playersResponse = await Promise.resolve(
+            fetch(process.env.BASE_URL + '/api/' + "players", {
+                cache:'no-store', 
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken?.value}`,
+                },
+            }, ),
         );
-
-        players = (await events_response.json()) as playersResponse[];
         
+        const playersRes = (await playersResponse.json()) as playersResponse;
+
+        if(!playersRes.isSuccess) {
+            return {
+                isSuccess: false,
+                errors: playersRes.mensaje,
+                players: []
+            }
+        }
+        players = playersRes?.data ?? []
         return {
+            isSuccess: true,
             players,
-            errors,
+            errors: null,
         };
     
 
     } catch (err) {
-        errors.players = `${err}` ;
         return {
+            isSuccess: false,
+            errors: `${err}`,
             players,
-            errors,
         };
     }
 };
 
 export const paymentTypesFetch = async (): Promise<PaymentsTypesPageProps> => {
     let paymentTypes: paymentTypesResponse[] = [];
-    const errors = { paymentTypes: null as string | null };
 
     try {
         const events_response = await Promise.resolve(fetch(process.env.BASE_URL + '/api/' + "paymentsTypes"));
 
         paymentTypes = (await events_response.json()) as paymentTypesResponse[];
-        
+
         return {
+            isSuccess: true,
             paymentTypes,
-            errors,
+            errors : null,
         };
     
 
     } catch (err) {
-        errors.paymentTypes = `${err}` ;
         return {
             paymentTypes,
-            errors,
+            errors: `${err}`,
+            isSuccess: false
         };
     }
 };
@@ -153,3 +169,51 @@ export const playersDetailFetch = async (requestedPlayer : string ): Promise<Pla
         };
     }
 };
+
+export const getUser =  async () : Promise<UserResponse> => {
+    const cookieStore = await cookies()
+    const authToken = cookieStore.get('authToken')?.value ?? ''
+
+    const base64Url = authToken?.split('.')[1]
+    const base64 = base64Url?.replace(/-/g, '+').replace(/_/g, '/') ?? '';
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        .join('')
+    );
+    const payload = JSON.parse(jsonPayload)
+    const user_uid = payload.sub
+
+    try {
+        const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/' + "users/" +  user_uid, {
+            cache:'no-store', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authToken}`,
+            },
+        }, )
+        
+        const result = await response.json();
+
+        if(!result.isSuccess){
+            return {
+                isSuccess: false,
+                error: 'Error',
+                data:null
+            }
+        }
+
+        return  {
+            isSuccess: result,
+            data:result.data
+        }
+
+    } catch(e) {
+        return {
+            isSuccess: false,
+            error: `${e}`,
+        }
+    }
+}
+

@@ -1,6 +1,6 @@
 import { generalEvent } from "./events";
 import { paymentsResponse, paymentTypesResponse } from "./payments";
-import { playersDetailResponse, playersResponse } from "./players";
+import { playersData, playersDetailResponse} from "./players";
 
 export interface EventsPageProps {
   events: generalEvent[] | null;
@@ -17,10 +17,9 @@ export interface EventsPageProps {
 }
 
 export interface PlayersPageProps {
-  players: playersResponse[] | null;
-  errors: {
-    players: string | null;
-  };
+  players: playersData[] | null;
+  isSuccess: boolean,
+  errors?: string | null,
 }
 export interface PaymentsPageProps {
   payments: paymentsResponse[] | null;
@@ -38,7 +37,32 @@ export interface PlayerDetailPageProps {
 
 export interface PaymentsTypesPageProps {
   paymentTypes: paymentTypesResponse[] | null;
-  errors: {
-    paymentTypes: string | null;
-  };
+  isSuccess: boolean
+  errors: string | null;
+}
+
+export interface SimpleUserResponse {
+  isSuccess: boolean;
+  error?: string;
+  data?:SimpleUserData | null
+}
+
+export interface SimpleUserData {
+  email:string;
+  username: string;
+  user_uid: string;
+}
+
+export interface UserResponse {
+  isSuccess: boolean;
+  error?: string;
+  data?:CompleteUserData | null
+}
+
+export interface CompleteUserData {
+  user_uid:   string;
+  email:      string;
+  username:   string;
+  first_name: string;
+  last_name:  string;
 }

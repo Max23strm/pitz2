@@ -1,0 +1,10 @@
+.image {
+    width: 150px;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.titles {
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}

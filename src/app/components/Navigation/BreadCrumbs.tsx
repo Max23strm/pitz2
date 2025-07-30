@@ -12,23 +12,24 @@ type PathConfig = {
 };
 
 const pathsandNames: Record<string, PathConfig> = {
-  players: { label: 'Jugadores', href: '/players' },
-  "new-player": { label: 'Nuevo jugador', href: '/players/new-player' },
-  events: { label: 'Eventos', href: '/organization/events' },
-  expenses: { label: 'Gastos', href: '/administration/expenses' },
+  players: { label: 'Jugadores', href: '/dashboard/players' },
+  "new-player": { label: 'Nuevo jugador', href: '/dashboard/players/new-player' },
+  events: { label: 'Eventos', href: '/dashboard/organization/events' },
+  "my-account": { label: 'Mi cuenta', href: '/dashboard/my-account' },
+  expenses: { label: 'Gastos', href: '/dashboard/administration/expenses' },
   organization: { label: 'Organización', href: null },
   payment_uid: { label: 'Detalle de pago', href: '' },
   administration: { label: 'Administación', href: null },
-  credentials: { label: 'Credenciales', href: '/administration/credentials' },
-  payments: { label: 'Pagos', href: '/administration/payments' },
-  "new-payment": { label: 'Nuevo pago', href: '/administration/payments/new-payment' },
+  credentials: { label: 'Credenciales', href: '/dashboard/administration/credentials' },
+  payments: { label: 'Pagos', href: '/dashboard/administration/payments' },
+  "new-payment": { label: 'Nuevo pago', href: '/dashboard/administration/payments/new-payment' },
 } as const;
 
 
 const BreadCrumbs = () => {
     const path = usePathname()
     const params = useParams()
-    const items = path.split('/home').splice(1).map( (i, index) =>{
+    const items = path.split('/dashboard/home').splice(1).map( (i, index) =>{
         if(i.length){
             const defineIfParam = (currentI : string) : string => {
                 const pathElem = Object.keys(params).find(key => params[key as string] === currentI)
@@ -51,7 +52,7 @@ const BreadCrumbs = () => {
             className={styles.mainContainer}
             separator={<ChevronRight size={16}/>}
         >
-            <Button color='indigo' component={Link} variant='subtle'  href={'/home'} size="compact-sm">
+            <Button color='indigo' component={Link} variant='subtle'  href={'/dashboard/home'} size="compact-sm">
                 Inicio
             </Button>
             {items}
