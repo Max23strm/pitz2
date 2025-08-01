@@ -1,7 +1,8 @@
 "use server"
 
 import { generalEvent } from "@/interfaces/events";
-import { EventsPageProps, PaymentsPageProps, PaymentsTypesPageProps, PlayerDetailPageProps, PlayersPageProps, UserResponse } from "@/interfaces/fetchers";
+import { AllExpensesResponse } from "@/interfaces/expenses";
+import { EventsPageProps, PaymentDetailResponse, PaymentsPageProps, PaymentsTypesPageProps, PlayerDetailPageProps, PlayersPageProps, UserResponse, UsersGeneralResponse } from "@/interfaces/fetchers";
 import { Fetch, HomeResponse } from "@/interfaces/home";
 import { paymentsResponse, paymentTypesResponse } from "@/interfaces/payments";
 import { playersData, playersDetailResponse, playersResponse } from "@/interfaces/players";
@@ -70,7 +71,6 @@ export const playersGeneralFetch = async (): Promise<PlayersPageProps> => {
         );
         
         const playersRes = (await playersResponse.json()) as playersResponse;
-
         if(!playersRes.isSuccess) {
             return {
                 isSuccess: false,
@@ -91,6 +91,87 @@ export const playersGeneralFetch = async (): Promise<PlayersPageProps> => {
             isSuccess: false,
             errors: `${err}`,
             players,
+        };
+    }
+};
+export const usersGeneralFetch = async (): Promise<UsersGeneralResponse> => {
+    const cookieStore = await cookies()
+    const authToken = cookieStore.get('authToken')
+
+    try {
+        const usersReq = await Promise.resolve(
+            fetch(process.env.BASE_URL + '/api/' + "users/", {
+                cache:'no-store', 
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken?.value}`,
+                },
+            }, ),
+        );
+        const userRes = await usersReq.json();
+
+        if(!userRes.isSuccess) {
+            return {
+                isSuccess: false,
+                mensaje: userRes.mensaje,
+                data: []
+            }
+        }
+        return {
+            data: userRes?.data,
+            isSuccess: userRes.isSuccess,
+            mensaje: null,
+        };
+    
+
+    } catch (err) {
+        return {
+            isSuccess: false,
+            mensaje: `${err}`,
+            data: [],
+        };
+    }
+};
+
+export const expensesGeneralFetch = async (requestedDate : string ): Promise<AllExpensesResponse> => {
+
+    const cookieStore = await cookies()
+    const authToken = cookieStore.get('authToken')
+       
+
+    try {
+        const events_response = await Promise.resolve(
+            fetch(process.env.BASE_URL + '/api/' + "expenses?date=" + requestedDate, {
+                cache:'no-store', 
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken?.value}`,
+                },
+            }, ),
+        );
+        const response = (await events_response.json()) as AllExpensesResponse;
+        
+        if(!response.isSuccess) {
+            return {
+                data: [],
+                isSuccess: false,
+                mensaje : response.mensaje
+            };
+        }
+
+
+        return {
+            data: response.data,
+            isSuccess: response.isSuccess,
+            estado: response.estado,
+        };
+    
+
+    } catch (err) {
+        return {
+            data: [],
+            isSuccess: false,
+            mensaje : `${err}`
         };
     }
 };
@@ -127,9 +208,8 @@ export const paymentsGeneralFetch = async (requestedDate : string ): Promise<Pay
         const events_response = await Promise.resolve(
             fetch(process.env.BASE_URL + '/api/' + "payments?date=" + requestedDate, {cache:'no-store'}),
         );
-
         payments = (await events_response.json()) as paymentsResponse[];
-
+        
         return {
             payments,
             errors,
@@ -216,4 +296,37 @@ export const getUser =  async () : Promise<UserResponse> => {
         }
     }
 }
+export const paymentsDetailFetch = async (requestedPayment : string ): Promise<PaymentDetailResponse> => {
+    const errors = { player: null as string | null };
+    const cookieStore = await cookies()
+    const authToken = cookieStore.get('authToken')
 
+
+    try {
+        const payment_response = await Promise.resolve(
+            fetch(process.env.BASE_URL + "/api/payments/paymentById/" + requestedPayment, {
+                cache:'no-store', 
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken?.value}`,
+                },
+            }, )
+        );
+        const response = (await payment_response.json())
+
+        return {
+            payment: response.data,
+            isSucces: response.isSuccess,
+            errors : null,
+        };
+    
+
+    } catch (err) {
+        errors.player = `${err}` ;
+        return {
+            payment: null,
+            isSucces: false,
+            errors: `${err}`,
+        };
+    }
+};

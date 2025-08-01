@@ -1,33 +1,32 @@
 'use client'
 import { Button, Group, Stack } from '@mantine/core'
 import { DatesProvider, MonthPickerInput } from '@mantine/dates'
-import { useEffect, useState } from 'react'
-import { paymentsResponse } from '@/interfaces/payments'
+import { useCallback, useEffect, useState } from 'react'
 import ErrorAlert from '@/app/components/InformationDisplay/ErrorAlert'
 import Link from 'next/link'
 import { FilePlus } from "@mynaui/icons-react";
 import dayjs from '@/helpers/dayjs'
 import ExpensesTable from './ExpensesTable'
+import { expensesGeneralFetch } from '@/helpers/dataFetcher'
+import { SimpleExpense } from '@/interfaces/expenses'
 
 const TableAndSelector = () => {
 
     const [value, setValue] = useState(dayjs().format('YYYY-MM-DD'))
-    const [fetchedPayments, setfetchedPayments] = useState<{response:paymentsResponse[], error: string | null}>({response:[], error:null})
-    // const makeCAll = useCallback( async ()=>{
-    //     const { payments, errors } = await paymentsGeneralFetch(value);
+    const [fetchedPayments, setfetchedPayments] = useState<{response:SimpleExpense[], error: string | null}>({response:[], error:null})
 
-    //     if(errors.payments){
-    //         setfetchedPayments({response:[], error: errors.payments})
-    //     } else {
-    //         setfetchedPayments({response:payments ?? [], error:null})
-    //     }
-
-    // },[value])
+    const makeCAll = useCallback( async ()=>{
+        const { data, isSuccess, mensaje } = await expensesGeneralFetch(value);
+        if(!isSuccess){
+            setfetchedPayments({response:[], error: mensaje ?? ''})
+        } else {
+            setfetchedPayments({response:data ?? [], error:null})
+        }
+    },[value])
 
     useEffect(()=>{
-        setfetchedPayments({response:[], error:null})
-        // makeCAll()
-    },[])
+        makeCAll()
+    },[makeCAll])
 
     const handleDateChange = (value : string | null) => {
         if( value === null) setValue(dayjs(value).format('YYYY-MM-DD'))
@@ -47,7 +46,7 @@ const TableAndSelector = () => {
                 </DatesProvider>
                 <Button
                     component={Link}
-                    href={'/dashboard/payments/new-payment'}
+                    href={'/dashboard/administration/expenses/new-expense'}
                     size='sm'
                     leftSection={<FilePlus/>}
                 >
@@ -61,8 +60,8 @@ const TableAndSelector = () => {
                 gap="md"
             >
 
-                <ErrorAlert errorMessage={fetchedPayments.error}/>
-                <ExpensesTable payments={fetchedPayments.response}/>
+                <ErrorAlert errorMessage={fetchedPayments?.error}/>
+                <ExpensesTable expenses={fetchedPayments.response}/>
 
             </Stack>
         </>

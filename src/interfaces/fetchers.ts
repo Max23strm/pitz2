@@ -1,5 +1,5 @@
 import { generalEvent } from "./events";
-import { paymentsResponse, paymentTypesResponse } from "./payments";
+import { PaymentDetails, paymentsResponse, paymentTypesResponse } from "./payments";
 import { playersData, playersDetailResponse} from "./players";
 
 export interface EventsPageProps {
@@ -34,6 +34,17 @@ export interface PlayerDetailPageProps {
     player: string | null;
   };
 }
+export interface PaymentDetailResponse {
+  payment: PaymentDetails | null;
+  isSucces: boolean,
+  errors: string | null;
+}
+
+export interface PaymentIdResponse {
+  payment_uid: string | null;
+  isSucces: boolean,
+  errors: string | null;
+}
 
 export interface PaymentsTypesPageProps {
   paymentTypes: paymentTypesResponse[] | null;
@@ -62,6 +73,20 @@ export interface UserResponse {
 export interface CompleteUserData {
   user_uid:   string;
   email:      string;
+  username:   string;
+  first_name: string;
+  last_name:  string;
+}
+
+export interface UsersGeneralResponse {
+  data:      userGeneral[];
+  estado?:    string;
+  mensaje?:    string | null;
+  isSuccess: boolean;
+}
+
+export interface userGeneral {
+  user_uid:   string;
   username:   string;
   first_name: string;
   last_name:  string;

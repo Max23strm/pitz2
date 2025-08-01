@@ -17,7 +17,7 @@ const page = async () => {
         paymentTypesFetch()
     ]).then(responses => {
         let playersResponse, paymentsResponse
-        console.log(responses)
+
         if(responses[0].status=== 'rejected') {
             playersResponse = {
                 players: [] ,

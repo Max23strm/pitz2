@@ -1,25 +1,26 @@
 import NoRowsAlert from '@/app/components/InformationDisplay/NoRowsAlert';
 import { formatCurrency } from '@/helpers/numberFormaters';
-import { paymentsResponse } from '@/interfaces/payments';
 import { FileText } from "@mynaui/icons-react";
 import { ActionIcon, Table, TableTbody, TableTd, TableTh, TableThead, TableTr } from '@mantine/core';
 import dayjs from '@/helpers/dayjs'
 import Link from 'next/link';
 import { JSX } from 'react'
+import { SimpleExpense } from '@/interfaces/expenses';
 
-const ExpensesTable = ({payments} : {payments: paymentsResponse[]}) => {
+const ExpensesTable = ({expenses} : {expenses: SimpleExpense[]}) => {
 
     let rows : JSX.Element[] = []
-    if(payments?.length) {
-        rows = payments.map((element : paymentsResponse) => (
-            <TableTr key={`${element.payment_uid}`}>
+    if(expenses?.length) {
+        rows = expenses.map((element : SimpleExpense) => (
+            <TableTr key={`${element.expense_uid}`}>
                 <TableTd>{dayjs(element.date).format('DD-MMM-YYYY')}</TableTd>
-                <TableTd> {element.payment_name} </TableTd>
+                <TableTd> {element.reason} </TableTd>
+                <TableTd> {element.assigned_to} </TableTd>
                 <TableTd>{formatCurrency(element.amount)}</TableTd>
                 <TableTd>
                     <ActionIcon
                         component={Link}                    
-                        href={'/dashboard/expenses/' + element.payment_uid}
+                        href={'/dashboard/expenses/' + element.expense_uid}
                         variant='subtle'
                     >
                         <FileText/>
@@ -35,7 +36,8 @@ const ExpensesTable = ({payments} : {payments: paymentsResponse[]}) => {
                 <TableThead>
                 <TableTr>
                     <TableTh>Fecha</TableTh>
-                    <TableTh>Tipo de gasto</TableTh>
+                    <TableTh>Concepto/razon</TableTh>
+                    <TableTh>Responsable</TableTh>
                     <TableTh>Monto</TableTh>
                 </TableTr>
                 </TableThead>

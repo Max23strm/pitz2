@@ -4,7 +4,7 @@ import TableAndSelector from './components/TableAndSelector'
 
 const page = () => {
     return (
-        <Container>
+        <Container fluid>
             <TableAndSelector/>
         </Container>
     )

@@ -29,8 +29,8 @@ const pathsandNames: Record<string, PathConfig> = {
 const BreadCrumbs = () => {
     const path = usePathname()
     const params = useParams()
-    const items = path.split('/dashboard/home').splice(1).map( (i, index) =>{
-        if(i.length){
+    const items = path.split('/').splice(1).map( (i, index) =>{
+        if(i.length && i !== 'dashboard'){
             const defineIfParam = (currentI : string) : string => {
                 const pathElem = Object.keys(params).find(key => params[key as string] === currentI)
                 return pathElem ?? i
