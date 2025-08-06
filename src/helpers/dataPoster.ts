@@ -1,6 +1,6 @@
 "use server"
 
-import { playerTypeForm, playerTypeFormWithStatusAsString } from "@/interfaces/players";
+import { playerTypeFormWithStatusAsString } from "@/interfaces/players";
 import { cookies } from "next/headers";
 
 type payments = {
