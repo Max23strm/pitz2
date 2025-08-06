@@ -4,7 +4,7 @@ import { estados, grupos_sanguineos, sexo } from '../helpers/options'
 import styles from '../new-player/styles/playerDetail.module.css'
 import { useForm } from '@mantine/form'
 import dayjs from '@/helpers/dayjs'
-import { playersDetailResponse, playerTypeForm, putPlayersOptions } from '@/interfaces/players'
+import { playersDetailResponse, playerTypeForm, playerTypeFormWithStatusAsString, putPlayersOptions } from '@/interfaces/players'
 import { DatePickerInput, DatesProvider } from '@mantine/dates'
 import utc from 'dayjs/plugin/utc';
 import Link from 'next/link'
@@ -56,7 +56,8 @@ const PlayerForm = ({player_info, page, player_uid} : formInterface) => {
                 title: 'Creando registro de jugador',
                 message: 'Espere un segundo por favor',
             })
-            const response = await postPlayerForm(data as playerTypeForm);
+
+            const response = await postPlayerForm({...data, status : data.status === '1' ? 1 : 0} as playerTypeFormWithStatusAsString);
             hanleResponse(response)
         } else {
             notifications.show({

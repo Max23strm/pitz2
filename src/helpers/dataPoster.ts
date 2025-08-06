@@ -1,6 +1,6 @@
 "use server"
 
-import { playerTypeForm } from "@/interfaces/players";
+import { playerTypeForm, playerTypeFormWithStatusAsString } from "@/interfaces/players";
 import { cookies } from "next/headers";
 
 type payments = {
@@ -93,7 +93,7 @@ export const postPaymentForm = async ( formValues: payments ) => {
     }
 
 }
-export const postPlayerForm = async ( formValues: playerTypeForm ) : Promise<{ isSuccess: boolean, estado?:string, error?:unknown, player_uid?: string }>  => {
+export const postPlayerForm = async ( formValues: playerTypeFormWithStatusAsString ) : Promise<{ isSuccess: boolean, estado?:string, error?:unknown, player_uid?: string }>  => {
     
     try {
         const response = await fetch(process.env.BASE_URL + '/api/' + "players/newPlayer", {
