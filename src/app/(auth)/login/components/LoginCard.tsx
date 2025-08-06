@@ -9,7 +9,7 @@ import React, { useState } from "react";
 import styles from "../../styles/Layout.module.css";
 import pitzLogo from "@public/images/pitz-text.png";
 import Image from "next/image";
-import Link from "next/link";
+// import Link from "next/link";
 import { useForm } from "@mantine/form";
 import { postLogin } from "@/helpers/loginFn";
 import { notifications } from "@mantine/notifications";
@@ -50,8 +50,7 @@ const LoginCard = () => {
             };expires=${expiration.toUTCString()};path=/`
 
             notifications.show({
-                title: 'Bienvenido!',
-                message: 'Valide sus credenciales',
+                message: '¡Bienvenido!',
                 color: 'green'
             })
 
@@ -95,9 +94,9 @@ const LoginCard = () => {
             <Button fullWidth mt="xl" size="md" radius="md"  type="submit" loading={isValidating}>
                 Iniciar sesión
             </Button>
-            <Button component={Link} href={'/forgot-password'} fullWidth mt="md" size="sm" radius="md" variant="subtle">
+            {/* <Button component={Link} href={'/forgot-password'} fullWidth mt="md" size="sm" radius="md" variant="subtle">
                 Olvidé mi contraseña
-            </Button>
+            </Button> */}
         </form>
     );
 };

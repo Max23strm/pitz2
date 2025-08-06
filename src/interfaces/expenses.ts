@@ -12,3 +12,12 @@ export interface SimpleExpense {
     date:        Date;
     expense_uid: string;
 }
+
+export interface ExpenseDetail {
+    assigned_to_uid:   string;
+    assigned_to:       string;
+    reason:            string;
+    amount:            string;
+    registered_by_uid: string;
+    date:              Date;
+}

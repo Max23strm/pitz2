@@ -18,7 +18,6 @@ import PlayerStatusBadge from "./PlayerStatusBadge";
 const PlayerTable = ({players} : {players: playersData[] | null}) => {
     const matches = useMediaQuery("(min-width: 900px)");
 
-
     let rows : JSX.Element[] = []
     if(players?.length) {
         rows = players.map((element : playersData) => (

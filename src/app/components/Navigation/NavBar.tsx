@@ -28,7 +28,7 @@ function NavBar({toogleClick} : {toogleClick: ()=>void}) {
       children : [
         { name: 'Ingresos', href: '/dashboard/administration/payments' },
         { name: 'Gastos', href: '/dashboard/administration/expenses' },
-        { name: 'Credenciales', href: '/dashboard/administration/credentials' }
+        // { name: 'Credenciales', href: '/dashboard/administration/credentials' }
       ]
     },
     {
@@ -37,8 +37,8 @@ function NavBar({toogleClick} : {toogleClick: ()=>void}) {
       href: '/dashboard/organization',
       children : [
         { name: "Calendarios", href: '/dashboard/organization/events' },
-        { name: "Partidos", href: '/dashboard/organization/matches' },
-        { name: "Entrenamientos", href: '/dashboard/organization/trainings' }
+        // { name: "Partidos", href: '/dashboard/organization/matches' },
+        // { name: "Entrenamientos", href: '/dashboard/organization/trainings' }
       ]
     },
   ]

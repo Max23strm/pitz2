@@ -14,7 +14,7 @@ const TableAndSelector = () => {
 
     const [value, setValue] = useState(dayjs().format('YYYY-MM-DD'))
     const [fetchedPayments, setfetchedPayments] = useState<{response:SimpleExpense[], error: string | null}>({response:[], error:null})
-
+    const [isLoading, setisLoading] = useState(true)
     const makeCAll = useCallback( async ()=>{
         const { data, isSuccess, mensaje } = await expensesGeneralFetch(value);
         if(!isSuccess){
@@ -22,6 +22,7 @@ const TableAndSelector = () => {
         } else {
             setfetchedPayments({response:data ?? [], error:null})
         }
+        setisLoading(false)
     },[value])
 
     useEffect(()=>{
@@ -61,7 +62,7 @@ const TableAndSelector = () => {
             >
 
                 <ErrorAlert errorMessage={fetchedPayments?.error}/>
-                <ExpensesTable expenses={fetchedPayments.response}/>
+                <ExpensesTable expenses={fetchedPayments.response} loading={isLoading}/>
 
             </Stack>
         </>

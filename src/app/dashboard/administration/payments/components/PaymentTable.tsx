@@ -2,13 +2,13 @@ import NoRowsAlert from '@/app/components/InformationDisplay/NoRowsAlert';
 import { formatCurrency } from '@/helpers/numberFormaters';
 import { paymentsResponse } from '@/interfaces/payments';
 import { FileText } from "@mynaui/icons-react";
-import { ActionIcon, Table, TableTbody, TableTd, TableTh, TableThead, TableTr } from '@mantine/core';
+import { ActionIcon, Container, Loader, Table, TableTbody, TableTd, TableTh, TableThead, TableTr } from '@mantine/core';
 import dayjs from '@/helpers/dayjs'
 import Link from 'next/link';
 import { JSX } from 'react'
 import { useMediaQuery } from '@mantine/hooks';
 
-const PaymentsTable = ({payments} : {payments: paymentsResponse[]}) => {
+const PaymentsTable = ({payments, loading} : {payments: paymentsResponse[], loading: boolean}) => {
     const matches = useMediaQuery("(min-width: 900px)");
     let rows : JSX.Element[] = []
     if(payments?.length) {
@@ -44,7 +44,10 @@ const PaymentsTable = ({payments} : {payments: paymentsResponse[]}) => {
                 </TableThead>
                 <TableTbody>{rows}</TableTbody>
             </Table>
-            { !rows.length && <NoRowsAlert/> }
+            <Container>
+                { loading && <Loader color='#0C5C7A' size="lg" type="dots" />} 
+                { (!rows.length && !loading) && <NoRowsAlert/> }
+            </Container>
         </>
     )
 }

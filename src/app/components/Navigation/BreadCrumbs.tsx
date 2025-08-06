@@ -18,6 +18,7 @@ const pathsandNames: Record<string, PathConfig> = {
   "my-account": { label: 'Mi cuenta', href: '/dashboard/my-account' },
   expenses: { label: 'Gastos', href: '/dashboard/administration/expenses' },
   organization: { label: 'Organización', href: null },
+  expense_uid: { label: 'Detalle de gasto', href: '' },
   payment_uid: { label: 'Detalle de pago', href: '' },
   administration: { label: 'Administación', href: null },
   credentials: { label: 'Credenciales', href: '/dashboard/administration/credentials' },

@@ -13,6 +13,7 @@ export interface Fetch {
 
 export interface HomeData {
     monthly_income: number;
+    monthly_expense: number;
     players_amount: number;
     upcoming_event: UpcomingEvent | null;
 }

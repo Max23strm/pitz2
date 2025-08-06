@@ -15,7 +15,7 @@ export default async function Home() {
     );
   }
 
-  return <Container fluid>
+return <Container fluid>
     <Grid>
       <GridCol span={{ base: 12}}>
         <StandardCard type={'event'} data={data?.upcoming_event ?? null}/>
@@ -24,10 +24,8 @@ export default async function Home() {
         <StandardCard type={"players"} data={data?.players_amount ?? 0}/>
       </GridCol>
       <GridCol span={{ base: 12, md: 6}}>
-         <StandardCard type={"amount"} data={data?.monthly_income ?? 0}/>
+         <StandardCard type={"amount"} data={{income: data?.monthly_income ?? 0, expense: data?.monthly_expense ?? 0}}/>
       </GridCol>
     </Grid>
-    
-   
   </Container>;
 }

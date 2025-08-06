@@ -1,14 +1,17 @@
 import { formatCurrency } from '@/helpers/numberFormaters';
 import { UpcomingEvent } from '@/interfaces/home'
 import { Card, Group, Stack, Text } from '@mantine/core'
-import { CalendarCheck, Dollar,  UsersGroup } from "@mynaui/icons-react";
+import { CalendarCheck, Dollar,  UsersGroup  } from "@mynaui/icons-react";
 import dayjs from '@/helpers/dayjs'
 
 import Link from 'next/link'
 
 interface AmountCardProps {
     type: 'amount';
-    data: number;
+    data: {
+        income: number
+        expense: number
+    };
 }
 
 interface PlayersCardProps {
@@ -67,11 +70,25 @@ const StandardCard = ({ type, data }: Props) => {
                 href={`/dashboard/administration/payments`}
             >
                 <Group justify='space-between'>
-                    <Stack >
-                        <Text  fw={700} size="lg" >Recaudados este mes</Text>
-                        <Stack gap={'sm'}>
-                            <Text size="lg" >{formatCurrency(data)}</Text>
-                        </Stack>
+                    <Stack gap={'lg'}>
+                        <Group >
+                            <Text  fw={700} size="lg" >Recaudado</Text>
+                            <Stack gap={'sm'}>
+                                <Text size="lg" >{formatCurrency(data.income)}</Text>
+                            </Stack>
+                        </Group>
+                        <Group >
+                            <Text  fw={700} size="lg" >Gastado</Text>
+                            <Stack gap={'sm'}>
+                                <Text size="lg" >{formatCurrency(data.expense)}</Text>
+                            </Stack>
+                        </Group>
+                        <Group >
+                            <Text  fw={700} size="lg" >Diferencia</Text>
+                            <Stack gap={'sm'}>
+                                <Text size="lg" >{formatCurrency(data.income - data.expense)}</Text>
+                            </Stack>
+                        </Group>
                     </Stack>
                     <Dollar size={'80px'} color='#0C5C7A'/>
                 </Group>

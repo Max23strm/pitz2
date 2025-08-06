@@ -2,7 +2,7 @@
 
 import { generalEvent } from "@/interfaces/events";
 import { AllExpensesResponse } from "@/interfaces/expenses";
-import { EventsPageProps, PaymentDetailResponse, PaymentsPageProps, PaymentsTypesPageProps, PlayerDetailPageProps, PlayersPageProps, UserResponse, UsersGeneralResponse } from "@/interfaces/fetchers";
+import { EventsPageProps, ExpenseDetailResponse, PaymentDetailResponse, PaymentsPageProps, PaymentsTypesPageProps, PlayerDetailPageProps, PlayersPageProps, UserResponse, UsersGeneralResponse } from "@/interfaces/fetchers";
 import { Fetch, HomeResponse } from "@/interfaces/home";
 import { paymentsResponse, paymentTypesResponse } from "@/interfaces/payments";
 import { playersData, playersDetailResponse, playersResponse } from "@/interfaces/players";
@@ -325,6 +325,40 @@ export const paymentsDetailFetch = async (requestedPayment : string ): Promise<P
         errors.player = `${err}` ;
         return {
             payment: null,
+            isSucces: false,
+            errors: `${err}`,
+        };
+    }
+};
+export const expenseDetailFetch = async (requestedExpense : string ): Promise<ExpenseDetailResponse> => {
+    const errors = { player: null as string | null };
+    const cookieStore = await cookies()
+    const authToken = cookieStore.get('authToken')
+
+
+    try {
+        const payment_response = await Promise.resolve(
+            fetch(process.env.BASE_URL + "/api/expenses/" + requestedExpense, {
+                cache:'no-store', 
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${authToken?.value}`,
+                },
+            }, )
+        );
+        const response = (await payment_response.json())
+
+        return {
+            expense: response.data,
+            isSucces: response.isSuccess,
+            errors : null,
+        };
+    
+
+    } catch (err) {
+        errors.player = `${err}` ;
+        return {
+            expense: null,
             isSucces: false,
             errors: `${err}`,
         };

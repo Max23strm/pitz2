@@ -1,4 +1,5 @@
 import { generalEvent } from "./events";
+import { ExpenseDetail } from "./expenses";
 import { PaymentDetails, paymentsResponse, paymentTypesResponse } from "./payments";
 import { playersData, playersDetailResponse} from "./players";
 
@@ -36,6 +37,11 @@ export interface PlayerDetailPageProps {
 }
 export interface PaymentDetailResponse {
   payment: PaymentDetails | null;
+  isSucces: boolean,
+  errors: string | null;
+}
+export interface ExpenseDetailResponse {
+  expense: ExpenseDetail | null;
   isSucces: boolean,
   errors: string | null;
 }

@@ -1,0 +1,17 @@
+.containerStyles {
+    display:flex;
+    flex-direction: column;
+    gap:1.3rem;
+}
+
+.editButtons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.modalButtons {
+    justify-content: end;
+    margin-top: 1rem;
+}

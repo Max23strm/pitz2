@@ -22,6 +22,7 @@ const ExpensesForm = ({ usersResponse } : {usersResponse: UsersGeneralResponse})
         mode: 'uncontrolled',
         initialValues: { assigned_uid: '', amount: 0, date: dayjs().toDate(), reason:'' },
         validateInputOnBlur: true,
+        validateInputOnChange: true,
         // functions will be used to validate values at corresponding key
         validate: {
             assigned_uid: (value) => value.length < 2 ? 'Elija un jugador o usuario' : null,
@@ -47,6 +48,7 @@ const ExpensesForm = ({ usersResponse } : {usersResponse: UsersGeneralResponse})
                 message:'Registro realizado con éxito',
                 color: 'green'
             })
+            form.reset()
             router.push('/dashboard/administration/payments/')
         } else {
             notifications.show({
@@ -57,8 +59,6 @@ const ExpensesForm = ({ usersResponse } : {usersResponse: UsersGeneralResponse})
         }
     }
     
-
-
     return (
         <form onSubmit={form.onSubmit(handleSubmit)} className={styles.form}>
             <Fieldset className={styles.fieldSet}>
