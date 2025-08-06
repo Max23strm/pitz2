@@ -16,6 +16,7 @@ const TableAndSelector = () => {
     const [fetchedPayments, setfetchedPayments] = useState<{response:SimpleExpense[], error: string | null}>({response:[], error:null})
     const [isLoading, setisLoading] = useState(true)
     const makeCAll = useCallback( async ()=>{
+        setisLoading(true)
         const { data, isSuccess, mensaje } = await expensesGeneralFetch(value);
         if(!isSuccess){
             setfetchedPayments({response:[], error: mensaje ?? ''})

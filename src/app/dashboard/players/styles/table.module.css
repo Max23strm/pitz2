@@ -1,0 +1,9 @@
+.filter_section{
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    align-items: flex-end;
+    @media (min-width: 984px) {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

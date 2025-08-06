@@ -40,20 +40,8 @@ const page = async () => {
     );
   }
 
-  return (
-    <Stack
-      bg="var(--mantine-color-body)"
-      align="start"
-      justify="center"
-      gap="md"
-    >
-      <Button variant="gradient" component={Link} href={"/dashboard/players/new-player"}>
-        Agregar jugador
-      </Button>
-      <section></section>
-      <PlayerTable players={players} />
-    </Stack>
-  );
+  return <PlayerTable players={players} />
+
 };
 
 export default page;
