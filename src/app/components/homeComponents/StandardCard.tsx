@@ -1,9 +1,9 @@
 import { formatCurrency } from '@/helpers/numberFormaters';
 import { UpcomingEvent } from '@/interfaces/home'
 import { Card, Group, Stack, Text } from '@mantine/core'
-import { CalendarCheck, Dollar,  UsersGroup  } from "@mynaui/icons-react";
+import { CalendarCheck, Dollar,  UsersGroup, ChevronDownLeft, ChevronUpRight } from "@mynaui/icons-react";
 import dayjs from '@/helpers/dayjs'
-
+import styles from './Card.module.css'
 import Link from 'next/link'
 
 interface AmountCardProps {
@@ -28,15 +28,18 @@ type Props = AmountCardProps | PlayersCardProps | EventCardProps;
 
 const StandardCard = ({ type, data }: Props) => {
     if(type === 'event' && data === null) {
-         <Card
-                radius="lg" withBorder
-                padding="xl"
-                component={Link}
-                href="/dashboard/organization/events"
-            >
-                <Text>Sin eventos programados</Text>
-            </Card>
+        return <Card
+            radius="lg" withBorder
+            padding="xl"
+            component={Link}
+            href="/dashboard/organization/events"
+            className={styles.mainCard}
+        >
+            <Text>Sin eventos programados</Text>
+            <CalendarCheck className={styles.heroIcon} size={'100px'} color='#0C5C7A'/>
+        </Card>
     }
+    
     if(type === 'event' && data !== null ) {
         const { date, event_name, event_uid, type_name} : UpcomingEvent = data
         return (
@@ -45,6 +48,7 @@ const StandardCard = ({ type, data }: Props) => {
                 padding="xl"
                 component={Link}
                 href={`/dashboard/organization/events/${event_uid}`}
+                className={styles.mainCard}
             >
                 <Group justify='space-between'>
                     <Stack >
@@ -55,43 +59,59 @@ const StandardCard = ({ type, data }: Props) => {
                             <Text c="dimmed" size='sm'>{type_name}</Text>
                         </Stack>
                     </Stack>
-                    <CalendarCheck size={'80px'} color='#0C5C7A'/>
+                    <CalendarCheck className={styles.heroIcon} size={'100px'} color='#0C5C7A'/>
                 </Group>
             </Card>
         )
 
     }
     if(type === 'amount' ) {
+        const total = data.income - data.expense
         return (
             <Card
                 radius="lg" withBorder
                 padding="xl"
-                component={Link}
-                href={`/dashboard/administration/payments`}
+                className={styles.mainCard}
             >
                 <Group justify='space-between'>
                     <Stack gap={'lg'}>
-                        <Group >
-                            <Text  fw={700} size="lg" >Recaudado</Text>
-                            <Stack gap={'sm'}>
-                                <Text size="lg" >{formatCurrency(data.income)}</Text>
+                        <Group>
+                            <Stack gap={'xs'}>
+                                <Text 
+                                    component={Link}
+                                    href={`/dashboard/administration/payments`}
+                                    fw={600} size="md" 
+                                >
+                                        Recaudado
+                                </Text>
+                                <Group gap={'sm'}>
+                                    <Text size="lg" >{formatCurrency(data.income)}</Text>
+                                    <ChevronDownLeft color='green'/>
+                                </Group>
+                            </Stack>
+                            <Stack gap={'xs'}>
+                                <Text 
+                                    component={Link}
+                                    href={`/dashboard/administration/expenses`}
+                                    fw={600} size="md" 
+                                >
+                                    Gastado
+                                </Text>
+                                <Group gap={'sm'}>
+                                    <Text size="lg" >{formatCurrency(data.expense)}</Text>
+                                    <ChevronUpRight color='red'/>
+                                </Group>
                             </Stack>
                         </Group>
-                        <Group >
-                            <Text  fw={700} size="lg" >Gastado</Text>
+                        <Group>
+                            <Text fw={600} size="md" >Diferencia</Text>
                             <Stack gap={'sm'}>
-                                <Text size="lg" >{formatCurrency(data.expense)}</Text>
-                            </Stack>
-                        </Group>
-                        <Group >
-                            <Text  fw={700} size="lg" >Diferencia</Text>
-                            <Stack gap={'sm'}>
-                                <Text size="lg" >{formatCurrency(data.income - data.expense)}</Text>
+                                <Text size="lg" c={total > 0 ? 'green' : 'red'}>{formatCurrency(total)}</Text>
                             </Stack>
                         </Group>
                     </Stack>
-                    <Dollar size={'80px'} color='#0C5C7A'/>
                 </Group>
+                <Dollar className={styles.heroIcon} size={'100px'} color='#0C5C7A'/>
             </Card>
         )
 
@@ -103,15 +123,16 @@ const StandardCard = ({ type, data }: Props) => {
                 padding="xl"
                 component={Link}
                 href={`/dashboard/players`}
+                className={styles.mainCard}
             >
                 <Group justify='space-between'>
                     <Stack >
-                        <Text  fw={700} size="lg" >Jugadores activos</Text>
+                        <Text fw={600} size="md" >Jugadores activos</Text>
                         <Stack gap={'sm'}>
                             <Text size="lg" >{data}</Text>
                         </Stack>
                     </Stack>
-                    <UsersGroup size={'80px'} color='#0C5C7A'/>
+                    <UsersGroup className={styles.heroIcon} size={'100px'} color='#0C5C7A'/>
                 </Group>
             </Card>
         )

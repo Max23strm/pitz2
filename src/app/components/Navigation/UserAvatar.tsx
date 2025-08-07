@@ -56,10 +56,10 @@ const UserAvatar = () => {
             <Menu>
                 <MenuTarget>
                     <Avatar 
-                        color="orange"
+                        color='accent-pitz'
                         name={userData.email}
                         alt={userData.email}
-                        variant='outline'
+                        variant='light'
                     />
                 </MenuTarget>
                 <MenuDropdown>

@@ -1,7 +1,7 @@
 'use client'
 
 import styles from './styles/NavLink.module.css';
-import { NavLink } from '@mantine/core';
+import { NavLink, useMantineTheme } from '@mantine/core';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { UsersGroup, FolderKanban, FolderTwo, Home } from "@mynaui/icons-react";
@@ -63,7 +63,6 @@ function NavBar({toogleClick} : {toogleClick: ()=>void}) {
                   <NavLink
                     key={`${e.href} - ${i} - padre`}
                     component={Link}
-                    color="cyan"
                     variant="subtle"
                     className={styles.button}
                     label={e.name}
@@ -78,7 +77,6 @@ function NavBar({toogleClick} : {toogleClick: ()=>void}) {
               return (
                 <NavLink
                   key={`${e.href} - ${i} - padre`}
-                  color="cyan"
                   variant="subtle"
                   label={e.name}
                   className={styles.button}
@@ -90,7 +88,6 @@ function NavBar({toogleClick} : {toogleClick: ()=>void}) {
                       <NavLink
                         key={`${child.href} - ${i} - ${index}`}
                         component={Link}
-                        color="cyan"
                         onClick={toogleClick}
                         variant="subtle"
                         className={styles.button}

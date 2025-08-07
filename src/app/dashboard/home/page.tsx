@@ -1,5 +1,5 @@
 import { homeFetch } from "@/helpers/dataFetcher";
-import { Alert, Container, Grid, GridCol } from "@mantine/core";
+import { Alert, Container, Grid, GridCol, Text } from "@mantine/core";
 import { DangerOctagon } from "@mynaui/icons-react";
 import dayjs from '@/helpers/dayjs'
 import StandardCard from "../../components/homeComponents/StandardCard";
@@ -17,6 +17,11 @@ export default async function Home() {
 
 return <Container fluid>
     <Grid>
+      <GridCol span={{ base: 12}}>
+        <Text c='primary-pitz'  fw={700} size="xl" ta={'end'}>
+          {dayjs().format("MMMM YYYY").toUpperCase()}
+        </Text>
+      </GridCol>
       <GridCol span={{ base: 12}}>
         <StandardCard type={'event'} data={data?.upcoming_event ?? null}/>
       </GridCol>

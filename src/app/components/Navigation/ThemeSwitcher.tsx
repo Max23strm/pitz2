@@ -8,8 +8,8 @@ const ThemeSwitcher = () => {
 
     return (
         <ActionIcon 
-            color='cyan'
-            variant='subtle'
+            color='accent-pitz'
+            variant='transparent'
             onClick={() => setColorScheme(colorScheme === 'light' ? 'dark' : 'light')}
         >
             <Paint/>

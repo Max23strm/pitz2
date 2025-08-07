@@ -31,7 +31,7 @@ const page = async () => {
                     }
                 </GridCol>
                 <GridCol span={{base:12, md:5}}>
-                    <Card shadow="xs" padding="lg" radius="md" withBorder>
+                    <Card shadow="xs" padding="lg" radius="md" withBorder className={styles.calendar_card}>
                         <MainCalendar events={events}/>
                     </Card>
                 </GridCol>

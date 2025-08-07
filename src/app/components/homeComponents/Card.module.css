@@ -1,0 +1,9 @@
+.mainCard{
+    position: relative;
+}
+
+.heroIcon{
+    position: absolute;
+    right: -30px;
+    top: -10px; 
+}
