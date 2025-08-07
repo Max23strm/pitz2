@@ -1,7 +1,7 @@
 'use client'
 
 import styles from './styles/NavLink.module.css';
-import { NavLink, useMantineTheme } from '@mantine/core';
+import { NavLink } from '@mantine/core';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { UsersGroup, FolderKanban, FolderTwo, Home } from "@mynaui/icons-react";
