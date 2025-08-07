@@ -103,12 +103,15 @@ const StandardCard = ({ type, data }: Props) => {
                                 </Group>
                             </Stack>
                         </Group>
-                        <Group>
-                            <Text fw={600} size="md" >Diferencia</Text>
-                            <Stack gap={'sm'}>
-                                <Text size="lg" c={total > 0 ? 'green' : 'red'}>{formatCurrency(total)}</Text>
-                            </Stack>
-                        </Group>
+                        {
+                            total !== 0 &&
+                                <Group>
+                                    <Text fw={600} size="md" >Diferencia</Text>
+                                    <Stack gap={'sm'}>
+                                        <Text size="lg" c={total > 0 ? 'green' : 'red'}>{formatCurrency(total)}</Text>
+                                    </Stack>
+                                </Group>
+                        }
                     </Stack>
                 </Group>
                 <Dollar className={styles.heroIcon} size={'100px'} color='#0C5C7A'/>
