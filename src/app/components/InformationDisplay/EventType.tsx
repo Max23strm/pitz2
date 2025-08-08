@@ -2,16 +2,14 @@ import { eventTypeName } from '@/interfaces/events'
 import { Badge } from '@mantine/core'
 import React from 'react'
 
-interface eventTypeProps {
-    event: eventTypeName | string
-}
-
 
 const defineColor = (event_name :  eventTypeName | string) : string => {
 
     switch(event_name){
         case 'Entrenamiento':
             return 'cyan'
+        case 'Actividad de integración':
+            return 'grape'
         case 'Torneo 15s':
             return 'indigo'
         case 'Torneo 7s':
@@ -24,7 +22,7 @@ const defineColor = (event_name :  eventTypeName | string) : string => {
 }
 
 
-const EventType = ({ event }: eventTypeProps) => {
+const EventType = ({event} : {event: string}) => {
     
     return (
         <Badge size='xs' color={ defineColor(event)} >

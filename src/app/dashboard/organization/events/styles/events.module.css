@@ -11,3 +11,12 @@
     align-items: center;
 }
 
+.card_body{
+    justify-content: center;
+    align-items: center;
+}
+
+.card_firt{
+    width:calc(100% - 42px)
+}
+

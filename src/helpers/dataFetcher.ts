@@ -1,8 +1,7 @@
 "use server"
 
-import { generalEvent } from "@/interfaces/events";
 import { AllExpensesResponse } from "@/interfaces/expenses";
-import { EventsPageProps, ExpenseDetailResponse, PaymentDetailResponse, PaymentsPageProps, PaymentsTypesPageProps, PlayerDetailPageProps, PlayersPageProps, UserResponse, UsersGeneralResponse } from "@/interfaces/fetchers";
+import { ExpenseDetailResponse, PaymentDetailResponse, PaymentsPageProps, PaymentsTypesPageProps, PlayerDetailPageProps, PlayersPageProps, UserResponse, UsersGeneralResponse } from "@/interfaces/fetchers";
 import { Fetch, HomeResponse } from "@/interfaces/home";
 import { paymentsResponse, paymentTypesResponse } from "@/interfaces/payments";
 import { playersData, playersDetailResponse, playersResponse } from "@/interfaces/players";
@@ -31,28 +30,6 @@ export const homeFetch = async (requestedDate : string ): Promise<HomeResponse> 
     };
 };
 
-export const eventsGeneralFetch = async (): Promise<EventsPageProps> => {
-    let events: generalEvent[] = [];
-    const errors = { events: null as string | null };
-    
-    try {
-        const events_response = await Promise.resolve(
-            fetch(process.env.BASE_URL + '/api/' + "events"),
-        );
-        events = (await events_response.json()) as generalEvent[];
-    } catch (err) {
-        errors.events = `${err}`;
-        return {
-            events,
-            errors,
-        };
-    }
-
-    return {
-        events,
-        errors,
-    };
-};
 
 
 export const playersGeneralFetch = async (): Promise<PlayersPageProps> => {
