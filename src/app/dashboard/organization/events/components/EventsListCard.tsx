@@ -10,17 +10,17 @@ const EventsListCard = ({event }:{event: GoogleEvent}) => {
 
     const defineIfFullDay = (e : GoogleEvent) => {
         if(dayjs(e.start).get('hour') === 0 && dayjs(e.start).add(1,'day').isSame(dayjs(e.end))) {
-            return {start: dayjs(event.start).format('DD/MMMM/YY'), end: null}
+            return {start: dayjs(event.start).format('DD/MM/YY'), end: null}
         } 
 
         return {
-            start: dayjs(e.start).get('hour') === 0 ? dayjs(event.start).format('DD/MMMM/YY') : dayjs(event.start).format('DD/MMMM/YY hh:mm'),
-            end: dayjs(e.end).get('hour') === 0 ? dayjs(event.end).format('DD/MMMM/YY') : dayjs(event.end).format('DD/MMMM/YY hh:mm')
+            start: dayjs(e.start).get('hour') === 0 ? dayjs(event.start).format('DD/MM/YY') : dayjs(event.start).format('DD/MM/YY hh:mm'),
+            end: dayjs(e.end).get('hour') === 0 ? dayjs(event.end).format('DD/MM/YY') : dayjs(event.end).format('DD/MM/YY hh:mm')
         }
     }
 
     return (
-        <Card shadow="xs" padding="lg" radius="md" withBorder key={event.google_id}>
+        <Card shadow="xs" padding="lg" radius="md" withBorder key={event.google_id} >
             <Group justify="space-between" className={styles.card_body}>
                 <Stack gap={1} className={styles.card_firt}>
                     <Group>
