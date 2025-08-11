@@ -19,3 +19,32 @@ export interface eventType {
     event_type_uid: string
     event_type_name: eventTypeName.Entrenamiento | eventTypeName.Quinces | eventTypeName.Sevens | eventTypeName.Tens
 }
+
+export interface GoogleEventsResponse {
+    events:    GoogleEvent[];
+    isSuccess: boolean;
+    mensaje?: string;
+    errors?: string
+}
+
+export interface GoogleEvent {
+    end:        Date;
+    event_type: string;
+    google_id:  string;
+    kind:       string;
+    link:       string;
+    location:   string;
+    start:      Date;
+    summary:    string;
+}
+
+export interface GoogleResponseEvent{
+    created: Date,
+    eventType: string,
+    htmlLink: string,
+    kind: string,
+    location: string,
+    start: Date,
+    status: string,
+    summary: string,
+}

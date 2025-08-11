@@ -3,25 +3,24 @@
 import dayjs from '@/helpers/dayjs'
 import { Indicator } from '@mantine/core';
 import { Calendar, DatesProvider } from '@mantine/dates';
-import { generalEvent } from '@/interfaces/events';
+import { GoogleEvent } from '@/interfaces/events';
 
-const MainCalendar = ({ events }: {events:generalEvent[]}) => {
-
+const MainCalendar = ({ events, monthChange }: {events:GoogleEvent[], monthChange: (newDate: string)=> void}) => {
 
     return (
         <DatesProvider settings={{ locale: 'es', firstDayOfWeek: 1, weekendDays: [0],  }}>
             <Calendar
                 hideOutsideDates={true}
-                onMonthSelect={(date)=>{console.log(date)}}
-                onNextMonth={(date)=>{console.log(date)}}
-                onPreviousMonth={(date)=>{console.log(date)}}
+                onMonthSelect={(date)=>{monthChange(date)}}
+                onNextMonth={(date)=>{monthChange(date)}}
+                onPreviousMonth={(date)=>{monthChange(date)}}
                 renderDay={(date) => {
                     const day = dayjs(date).date();
-                    const indicate = events.find(e => dayjs(e.date).format('DDMMYYYY') === dayjs(date).format('DDMMYYYY') )
+                    const indicate = events?.find(e => dayjs(e.start).format('DDMMYYYY') === dayjs(date).format('DDMMYYYY') )
                     return (
                         <Indicator 
-                            size={6} 
-                            color="red" 
+                            size={7} 
+                            color="accent-pitz" 
                             offset={-2} 
                             disabled={!Boolean(indicate)}
                         >

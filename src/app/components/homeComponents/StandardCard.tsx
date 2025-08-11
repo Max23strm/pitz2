@@ -41,22 +41,22 @@ const StandardCard = ({ type, data }: Props) => {
     }
     
     if(type === 'event' && data !== null ) {
-        const { date, event_name, event_uid, type_name} : UpcomingEvent = data
+        const { summary, start, location} : UpcomingEvent = data
         return (
             <Card
                 radius="lg" withBorder
                 padding="xl"
                 component={Link}
-                href={`/dashboard/organization/events/${event_uid}`}
+                href={`/dashboard/organization/events/`}
                 className={styles.mainCard}
             >
                 <Group justify='space-between'>
                     <Stack >
                         <Text  fw={700} size="lg" >Próximo evento</Text>
                         <Stack gap={'xs'}>
-                            <Text size="lg" c='indigo'>{event_name}</Text>
-                            <Text c="dimmed" size='sm'>{dayjs(date).format('DD/MM/YYYY')}</Text>
-                            <Text c="dimmed" size='sm'>{type_name}</Text>
+                            <Text size="lg" c='indigo'>{summary}</Text>
+                            <Text c="dimmed" size='sm'>{start?.dateTime ? dayjs(start.dateTime).format('DD/MM/YYYY HH:mm') : dayjs(start.date).format('DD/MM/YYYY')}</Text>
+                            <Text c="dimmed" size='sm'>{location}</Text>
                         </Stack>
                     </Stack>
                     <CalendarCheck className={styles.heroIcon} size={'100px'} color='#0C5C7A'/>

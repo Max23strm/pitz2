@@ -1,3 +1,4 @@
+import { GoogleEventsResponse } from "@/interfaces/events";
 import { SimpleUserResponse } from "@/interfaces/fetchers";
 
 export const getBasicUser =  async () : Promise<SimpleUserResponse> => {
@@ -33,4 +34,35 @@ export const getBasicUser =  async () : Promise<SimpleUserResponse> => {
             error: `${e}`,
         }
     }
+}
+export const eventsGeneralFetch =  async (date : string) : Promise<GoogleEventsResponse> => {
+    const cookies = document.cookie.split('; ');
+    const authToken = cookies.find(cookie => cookie.startsWith('authToken'))
+    let eventsRes:GoogleEventsResponse;
+        
+    try {
+        const events_response = await Promise.resolve(
+            fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/' + "events/getEventsByMonth?date=" + date, {
+            cache:'no-store', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${authToken?.split('=')[1]}`,
+            },
+        }),
+        );
+        eventsRes = (await events_response.json()) as GoogleEventsResponse;
+    
+    } catch (err) {
+        return {
+            events : [],
+            errors: `${err}`,
+            isSuccess: false,
+        };
+    }
+
+    return {
+        events : eventsRes.events,
+        mensaje: eventsRes.mensaje,
+        isSuccess : eventsRes.isSuccess,
+    };
 }

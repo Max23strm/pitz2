@@ -19,8 +19,13 @@ export interface HomeData {
 }
 
 export interface UpcomingEvent {
-    event_uid:  string;
-    event_name: string;
-    date:       Date;
-    type_name:  string;
+    start:       { dateTime: string, timeZone: string, date: string };
+    end:       { dateTime: string, timeZone: string, date: string };
+    created:  string;
+    event_type:  string;
+    html_link:  string;
+    kind:  string;
+    location:  string;
+    status:  string;
+    summary:  string;
 }
