@@ -5,6 +5,7 @@ import { CalendarCheck, Dollar,  UsersGroup, ChevronDownLeft, ChevronUpRight } f
 import dayjs from '@/helpers/dayjs'
 import styles from './Card.module.css'
 import Link from 'next/link'
+import ErrorAlert from '../InformationDisplay/ErrorAlert';
 
 interface AmountCardProps {
     type: 'amount';
@@ -41,7 +42,10 @@ const StandardCard = ({ type, data }: Props) => {
     }
     
     if(type === 'event' && data !== null ) {
-        const { summary, start, location} : UpcomingEvent = data
+        const { summary, start, location, status } : UpcomingEvent = data
+        if( status === '') {
+            return  <ErrorAlert errorMessage={"Error obteniendo fechas"}/>
+        }
         return (
             <Card
                 radius="lg" withBorder
