@@ -7,7 +7,7 @@ import PaymentsTable from './PaymentTable'
 import { paymentsResponse } from '@/interfaces/payments'
 import ErrorAlert from '@/app/components/InformationDisplay/ErrorAlert'
 import Link from 'next/link'
-import { FilePlus, Download } from "@mynaui/icons-react";
+import { FilePlus,  } from "@mynaui/icons-react";
 import dayjs from '@/helpers/dayjs'
 import DownloadModal from '@/app/components/adminComponents/DownloadModal'
 

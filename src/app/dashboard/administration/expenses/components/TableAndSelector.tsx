@@ -4,7 +4,7 @@ import { DatesProvider, MonthPickerInput } from '@mantine/dates'
 import { useCallback, useEffect, useState } from 'react'
 import ErrorAlert from '@/app/components/InformationDisplay/ErrorAlert'
 import Link from 'next/link'
-import { FilePlus, Download } from "@mynaui/icons-react";
+import { FilePlus } from "@mynaui/icons-react";
 import dayjs from '@/helpers/dayjs'
 import ExpensesTable from './ExpensesTable'
 import { expensesGeneralFetch } from '@/helpers/dataFetcher'
