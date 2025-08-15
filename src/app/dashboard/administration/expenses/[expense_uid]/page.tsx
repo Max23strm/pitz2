@@ -5,6 +5,7 @@ import { Button, Container, Grid, GridCol, Text } from '@mantine/core'
 import Link from 'next/link';
 import styles from '../styles/expenses.module.css'
 import dayjs from "@/helpers/dayjs";
+import CancelExpenses from './components/CancelExpenses';
 
 const page = async ({
     params,
@@ -21,7 +22,7 @@ const page = async ({
     if (!response.expense) {
         return <ErrorAlert errorMessage={"Pago no encontrado"} />;
     }
-    console.log(response.expense)
+
     return (
         <Container fluid>
             <Grid>
@@ -50,7 +51,7 @@ const page = async ({
                     >
                         Regresar
                     </Button>
-                    {/* <CancelPayment payment_uid={paymentParams.payment_uid}/> */}
+                    <CancelExpenses expense_uid={expenseParams.expense_uid}/>
                 </GridCol>
             </Grid>
         </Container>

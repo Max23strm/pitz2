@@ -6,10 +6,8 @@ import dayjs from '@/helpers/dayjs'
 import Link from 'next/link';
 import { JSX } from 'react'
 import { SimpleExpense } from '@/interfaces/expenses';
-import { useMediaQuery } from '@mantine/hooks';
 
-const ExpensesTable = ({expenses, loading} : {expenses: SimpleExpense[], loading: boolean}) => {
-    const matches = useMediaQuery("(min-width: 900px)");
+const ExpensesTable = ({expenses, loading, matches} : {expenses: SimpleExpense[], loading: boolean, matches:boolean}) => {
 
     let rows : JSX.Element[] = []
     if(expenses?.length) {

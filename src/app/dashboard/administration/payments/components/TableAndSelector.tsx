@@ -1,17 +1,19 @@
 'use client'
 import { paymentsGeneralFetch } from '@/helpers/dataFetcher'
-import { Button, Group, Stack } from '@mantine/core'
+import { ActionIcon, Button, Group, Stack } from '@mantine/core'
 import { DatesProvider, MonthPickerInput } from '@mantine/dates'
 import { useCallback, useEffect, useState } from 'react'
 import PaymentsTable from './PaymentTable'
 import { paymentsResponse } from '@/interfaces/payments'
 import ErrorAlert from '@/app/components/InformationDisplay/ErrorAlert'
 import Link from 'next/link'
-import { FilePlus,  } from "@mynaui/icons-react";
+import { FilePlus, Download } from "@mynaui/icons-react";
 import dayjs from '@/helpers/dayjs'
 import DownloadModal from '@/app/components/adminComponents/DownloadModal'
+import { useMediaQuery } from '@mantine/hooks'
 
 const TableAndSelector = () => {
+    const matches = useMediaQuery("(min-width: 900px)");
 
     const [value, setValue] = useState(dayjs().format('YYYY-MM-DD'))
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -55,14 +57,25 @@ const TableAndSelector = () => {
                     />
                 </DatesProvider>
                 <Group>
-                    {/* <Button
-                        size='sm'
-                        leftSection={<Download/>}
-                        variant='light'
-                        onClick={handleModal}
-                    >
-                        Descargar
-                    </Button> */}
+                    {
+                        matches ? 
+                            <Button
+                                size='sm'
+                                leftSection={<Download/>}
+                                variant='light'
+                                disabled
+                                onClick={handleModal}
+                            >
+                                Descargar
+                            </Button> :
+                            <ActionIcon
+                                variant='light'
+                                disabled
+                                onClick={handleModal}
+                            >
+                                <Download/>
+                            </ActionIcon>
+                    }
                     <Button
                         component={Link}
                         href={'/dashboard/administration/payments/new-payment'}
@@ -81,7 +94,7 @@ const TableAndSelector = () => {
             >
 
                 <ErrorAlert errorMessage={fetchedPayments.error}/>
-                <PaymentsTable payments={fetchedPayments.response} loading={loading}/>
+                <PaymentsTable payments={fetchedPayments.response} loading={loading} matches={matches}/>
 
             </Stack>
         </>

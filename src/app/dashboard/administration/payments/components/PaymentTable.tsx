@@ -6,10 +6,8 @@ import { ActionIcon, Container, Loader, Table, TableTbody, TableTd, TableTh, Tab
 import dayjs from '@/helpers/dayjs'
 import Link from 'next/link';
 import { JSX } from 'react'
-import { useMediaQuery } from '@mantine/hooks';
 
-const PaymentsTable = ({payments, loading} : {payments: paymentsResponse[], loading: boolean}) => {
-    const matches = useMediaQuery("(min-width: 900px)");
+const PaymentsTable = ({payments, loading, matches} : {payments: paymentsResponse[], loading: boolean, matches:boolean}) => {
     let rows : JSX.Element[] = []
     if(payments?.length) {
         rows = payments.map((element : paymentsResponse) => (
