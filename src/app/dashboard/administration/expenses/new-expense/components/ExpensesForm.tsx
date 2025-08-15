@@ -49,7 +49,7 @@ const ExpensesForm = ({ usersResponse } : {usersResponse: UsersGeneralResponse})
                 color: 'green'
             })
             form.reset()
-            router.push('/dashboard/administration/payments/')
+            router.push('/dashboard/administration/expenses/')
         } else {
             notifications.show({
                 title: 'Error',
@@ -66,6 +66,7 @@ const ExpensesForm = ({ usersResponse } : {usersResponse: UsersGeneralResponse})
                     className={styles.fullWidthElement}
                     radius={'md'}
                     withAsterisk
+                    searchable
                     label="Responsable del gasto"
                     data={usersResponse.data?.map((v : userGeneral ) => ({value: v.user_uid, label:`${v.last_name}, ${v.first_name}` }))}
                     placeholder="Selecciona un responsable"

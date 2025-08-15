@@ -77,6 +77,7 @@ const PaymentsForm = ({formOptions} : {formOptions: optionsForm}) => {
                     className={styles.fullWidthElement}
                     radius={'md'}
                     withAsterisk
+                    searchable
                     label="Jugador"
                     data={playersResponse.players?.map((v : playersData ) => ({value: v.player_uid, label:`${v.last_name}, ${v.firstName}` }))}
                     placeholder="Selecciona un jugador"
@@ -122,6 +123,7 @@ const PaymentsForm = ({formOptions} : {formOptions: optionsForm}) => {
                     className={styles.fullWidthElement}
                     radius={'md'}
                     withAsterisk
+                    searchable
                     data={paymentsResponse.paymentTypes?.map( (v : paymentTypesResponse) => ({value: v.payment_type_uid, label:v.payment_name}))}
                     label="Tipo de pago"
                     placeholder="Selecciona el tipo de pago"
