@@ -66,7 +66,6 @@ const TableAndSelector = () => {
                                 Descargar
                             </Button> :
                             <ActionIcon
-                                disabled
                                 variant='light'
                                 onClick={handleModal}
                             >
