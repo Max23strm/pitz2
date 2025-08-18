@@ -62,7 +62,6 @@ const TableAndSelector = () => {
                                 leftSection={<Download/>}
                                 variant='light'
                                 onClick={handleModal}
-                                disabled
                             >
                                 Descargar
                             </Button> :

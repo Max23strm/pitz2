@@ -5,7 +5,7 @@ import { Download } from "@mynaui/icons-react";
 import { useForm } from '@mantine/form';
 import dayjs from '@/helpers/dayjs'
 import { useState } from 'react';
-import { postPaymentsResponse } from '@/helpers/dataPosterClient';
+import { postExpensesResport, postPaymentsResponse } from '@/helpers/dataPosterClient';
 import { notifications } from '@mantine/notifications';
 
 const DownloadModal = ({isOpened, handleModal, type}: {isOpened: boolean, handleModal: ()=>void, type :'ingreso' | 'gasto'}) => {
@@ -33,16 +33,30 @@ const DownloadModal = ({isOpened, handleModal, type}: {isOpened: boolean, handle
     
     const handleSubmit = async (data : FormValues) => {
         setIsLoading(true)
-        const response = await postPaymentsResponse(data)
-        if(response?.isSuccess === false) {
-            notifications.show({
-                title: 'Error obteniendo reporte',
-                message: 'Intente nuevamente',
-                color: 'red'
-            })
+        if( type === 'ingreso') {
+            const response = await postPaymentsResponse(data)
+            if(response?.isSuccess === false) {
+                notifications.show({
+                    title: 'Error obteniendo reporte',
+                    message: 'Intente nuevamente',
+                    color: 'red'
+                })
+            }
+    
+            setIsLoading(false) 
+        } else {
+            const response = await postExpensesResport(data)
+            if(response?.isSuccess === false) {
+                notifications.show({
+                    title: 'Error obteniendo reporte',
+                    message: 'Intente nuevamente',
+                    color: 'red'
+                })
+            }
+    
+            setIsLoading(false) 
         }
-        
-        setIsLoading(false)
+
     }
 
     const avoidClosing = () => {

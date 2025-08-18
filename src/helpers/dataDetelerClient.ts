@@ -44,7 +44,7 @@ export const deleteExpense = async (requestedExpense : string ): Promise<Payment
         const authToken = cookies.find(cookie => cookie.startsWith('authToken'))
 
         const payment_response = await Promise.resolve(
-            fetch(process.env.NEXT_PUBLIC_BASE_URL + "/api/payments/deleteExpense/" + requestedExpense,
+            fetch(process.env.NEXT_PUBLIC_BASE_URL + "/api/expense/deleteExpense/" + requestedExpense,
                 {
                     method:'DELETE',
                     headers: {
