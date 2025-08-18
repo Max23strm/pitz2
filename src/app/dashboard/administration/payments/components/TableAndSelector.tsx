@@ -43,6 +43,7 @@ const TableAndSelector = () => {
     const handleModal = () => {
         setIsModalOpen(prev => !prev)
     }
+    
 
     return (
         <>  
@@ -63,7 +64,6 @@ const TableAndSelector = () => {
                                 size='sm'
                                 leftSection={<Download/>}
                                 variant='light'
-                                disabled
                                 onClick={handleModal}
                             >
                                 Descargar
