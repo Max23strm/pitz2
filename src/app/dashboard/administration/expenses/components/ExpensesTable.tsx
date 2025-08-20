@@ -6,6 +6,7 @@ import dayjs from '@/helpers/dayjs'
 import Link from 'next/link';
 import { JSX } from 'react'
 import { SimpleExpense } from '@/interfaces/expenses';
+import styles from '@/app/components/styles/table.module.css'
 
 const ExpensesTable = ({expenses, loading, matches} : {expenses: SimpleExpense[], loading: boolean, matches:boolean}) => {
 
@@ -32,18 +33,19 @@ const ExpensesTable = ({expenses, loading, matches} : {expenses: SimpleExpense[]
 
     return (
         <>
-            <Table stickyHeader stickyHeaderOffset={60} highlightOnHover>
+            <Table stickyHeader stickyHeaderOffset={60} highlightOnHover className={styles.table_all}>
                 <TableThead>
                 <TableTr>
                     <TableTh>Fecha</TableTh>
                     <TableTh>Concepto/razon</TableTh>
                     {matches && <TableTh>Responsable</TableTh> }
                     <TableTh>Monto</TableTh>
+                    <TableTh></TableTh>
                 </TableTr>
                 </TableThead>
                 {
                     !loading && 
-                    <TableTbody>{rows}</TableTbody>
+                    <TableTbody className={styles.table_body}>{rows}</TableTbody>
                 }
                 </Table>
                 <Container>

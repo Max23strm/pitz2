@@ -6,6 +6,7 @@ import { ActionIcon, Container, Loader, Table, TableTbody, TableTd, TableTh, Tab
 import dayjs from '@/helpers/dayjs'
 import Link from 'next/link';
 import { JSX } from 'react'
+import styles from '@/app/components/styles/table.module.css'
 
 const PaymentsTable = ({payments, loading, matches} : {payments: paymentsResponse[], loading: boolean, matches:boolean}) => {
     let rows : JSX.Element[] = []
@@ -31,16 +32,17 @@ const PaymentsTable = ({payments, loading, matches} : {payments: paymentsRespons
 
     return (
         <>
-            <Table stickyHeader stickyHeaderOffset={60} highlightOnHover>
+            <Table stickyHeader stickyHeaderOffset={60} highlightOnHover className={styles.table_all}>
                 <TableThead>
                 <TableTr>
                     <TableTh>Fecha de ingreso</TableTh>
                     <TableTh>Nombre</TableTh>
                     {matches &&<TableTh>Tipo</TableTh>}
                     <TableTh>Monto</TableTh>
+                    <TableTh>   </TableTh>
                 </TableTr>
                 </TableThead>
-                <TableTbody>{rows}</TableTbody>
+                <TableTbody className={styles.table_body}>{rows}</TableTbody>
             </Table>
             <Container>
                 { loading && <Loader color='#0C5C7A' size="lg" type="dots" />} 

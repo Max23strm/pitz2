@@ -17,7 +17,7 @@ import { JSX, useState } from "react";
 import { useMediaQuery } from "@mantine/hooks";
 import PlayerStatusBadge from "./PlayerStatusBadge";
 import SearchBar from "./table/SearchBar";
-import styles from '../styles/table.module.css'
+import styles from '@/app/components/styles/table.module.css'
 
 const PlayerTable = ({players} : {players: playersData[] | null}) => {
     const matches = useMediaQuery("(min-width: 900px)");
@@ -45,22 +45,22 @@ const PlayerTable = ({players} : {players: playersData[] | null}) => {
     if(playerState?.length) {
         rows = playerState.map((element : playersData) => (
             <TableTr key={`${element.player_uid}`}>
-            <TableTd>{`${element.firstName} ${element.last_name}`}</TableTd>
-            {matches && <TableTd>{element.email}</TableTd>}
-            <TableTd>
-                <PlayerStatusBadge status={element.status}/>
-            </TableTd>
-            <TableTd>
-                
-                <Button
-                    size="compact-sm"
-                    variant="light"
-                    component={Link}
-                    href={`/dashboard/players/${element.player_uid}`}
-                >
-                    <User />
-                </Button>
-            </TableTd>
+              <TableTd >{`${element.firstName} ${element.last_name}`}</TableTd>
+              {matches && <TableTd className={styles.table_body}>{element.email}</TableTd>}
+              <TableTd className={styles.table_body}>
+                  <PlayerStatusBadge status={element.status}/>
+              </TableTd>
+              <TableTd className={styles.table_body}>
+                  
+                  <Button
+                      size="compact-sm"
+                      variant="light"
+                      component={Link}
+                      href={`/dashboard/players/${element.player_uid}`}
+                  >
+                      <User />
+                  </Button>
+              </TableTd>
             </TableTr>
         ));
 
@@ -80,13 +80,13 @@ const PlayerTable = ({players} : {players: playersData[] | null}) => {
             Agregar jugador
           </Button>
         </Group>
-          <Table stickyHeader stickyHeaderOffset={60} highlightOnHover >
-          <TableThead>
+          <Table stickyHeader stickyHeaderOffset={60} highlightOnHover className={styles.table_all}>
+          <TableThead >
             <TableTr>
-              <TableTh>Nombre</TableTh>
+              <TableTh >Nombre</TableTh>
               {matches && <TableTh >Correo electrónico</TableTh>}
-              <TableTh>Estado</TableTh>
-              <TableTh></TableTh>
+              <TableTh >Estado</TableTh>
+              <TableTh ></TableTh>
             </TableTr>
           </TableThead>
           <TableTbody>{rows}</TableTbody>

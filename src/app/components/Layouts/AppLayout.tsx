@@ -19,10 +19,11 @@ function AppLayout({ children }: { children: React.ReactNode }) {
     <AppShell
       header={{ height: 60 }}
       navbar={{
-        width: 300,
+        width: 210,
         breakpoint: "sm",
         collapsed: { mobile: !opened },
       }}
+      withBorder={false}
       padding="md"
     >
       <AppShellHeader className={styles.header_con_logo}>

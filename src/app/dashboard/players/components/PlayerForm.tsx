@@ -1,5 +1,5 @@
 "use client"
-import { Avatar, Button, Checkbox, Grid, GridCol, Group, Select, SelectProps, Textarea, TextInput } from '@mantine/core'
+import { Avatar, Button, Card, Checkbox, Grid, GridCol, Group, Select, SelectProps, Text, Textarea, TextInput } from '@mantine/core'
 import { estados, grupos_sanguineos, sexo } from '../helpers/options'
 import styles from '../new-player/styles/playerDetail.module.css'
 import { useForm } from '@mantine/form'
@@ -126,75 +126,117 @@ const PlayerForm = ({player_info, page, player_uid} : formInterface) => {
             <PlayerStatusBadge status={parseInt(option.value)}/>
         </Group>
     );
+    
+    const status = form.getValues().status
+    const sex = form.getValues().sex
 
     return (
-        <form  onSubmit={form.onSubmit(handlePromise)}> 
-            <Grid gutter={{base: 15}}>
+        <form onSubmit={form.onSubmit(handlePromise)} className={styles.form}> 
+            <Grid gutter={{base: 12}} className={styles.fields}>
+                <GridCol span={{ base: 12, md:5, lg:3 }}>
+                    <Card className={styles.tabs_section} style={{background: status === '0' ? 'linear-gradient(145deg, var(--mantine-color-indigo-filled) 0%, var(--mantine-color-accent-pitz-filled) 100%)' : 'linear-gradient(145deg, var(--mantine-color-indigo-filled) 0%, var(--mantine-color-primary-pitz-filled) 100%)'}} radius={'lg'}>
+                        <Avatar className={styles.image} variant='gradient' gradient={{ from: sex === 'Mujer' ? 'red' :'indigo', to: 'primary-pitz', deg: 135 }}/>
+
+                        <div className={styles.nav_buttons}>
+                            <Button 
+                                variant='default'
+                                component='a'
+                                size='sm'
+                                href='#info-básica'
+                            >
+                                Información básica
+                            </Button>
+                            <Button 
+                                variant='default'
+                                component='a'
+                                size='sm'
+                                href='#info-médica'
+                            >
+                                Información médica
+                            </Button>
+                            <Button 
+                                variant='default'
+                                component='a'
+                                size='sm'
+                                href='#otra-info'
+                            >
+                                Otra información
+                            </Button>
+                        </div>
+                    </Card>    
+                </GridCol>
+            <GridCol span={{ base: 12, md:7, lg:9 }}>
+            <Grid gutter={{base: 12}} className={styles.fields}>
+                <GridCol span={{ base: 12 }}>
+                    <Text variant='gradient' fw={700} size='xl' id='info-básica'>Información básica</Text>
+                </GridCol>
                 <GridCol span={{ base: 12, md: 4 }}>
-                    <Avatar className={styles.image} />
+                    <TextInput
+                        className={styles.full_width}
+                        radius={'md'}
+                        withAsterisk
+                        label="Nombre"
+                        placeholder="Nombres"
+                        key={form.key('firstName')}
+                        {...form.getInputProps('firstName')}
+                    />
                 </GridCol>
-                <GridCol span={{ base: 12, md:8 }}  className={styles.form_section}>
-                    <GridCol>
-                        <TextInput
-                            className={styles.full_width}
-                            radius={'md'}
-                            withAsterisk
-                            label="Nombre"
-                            placeholder="Nombres"
-                            key={form.key('firstName')}
-                            {...form.getInputProps('firstName')}
-                        />
-                        <TextInput
-                            className={styles.full_width}
-                            withAsterisk
-                            radius={'md'}
-                            label="Apellidos"
-                            placeholder="Apellidos"
-                            key={form.key('last_name')}
-                            {...form.getInputProps('last_name')}
-                        />
-                        <TextInput
-                            className={styles.full_width}
-                            radius={'md'}
-                            withAsterisk
-                            label="Correo electrónico"
-                            placeholder="Correo electrónico"
-                            key={form.key('email')}
-                            {...form.getInputProps('email')}
-                        />
-                    </GridCol>
-                    <GridCol span={{ base: 12}} className={styles.phone_fields}>
-                        <TextInput
-                            className={styles.full_width}
-                            radius={'md'}
-                            withAsterisk
-                            label="Número telefónico"
-                            placeholder="Número telefónico"
-                            key={form.key('phone_number')}
-                            {...form.getInputProps('phone_number')}
-                        />
-                        <TextInput
-                            className={styles.full_width}
-                            radius={'md'}
-                            label="Dirección"
-                            placeholder="Dirección"
-                            key={form.key('address')}
-                            {...form.getInputProps('address')}
-                            />
-                        <DatesProvider settings={{ locale: 'es', firstDayOfWeek: 1, weekendDays: [0],  }}>
-                            <DatePickerInput
-                                radius={'md'}
-                                withAsterisk
-                                label="Fecha de nacimiento"
-                                className={styles.full_width}
-                                key={form.key('birth_dt')}
-                                {...form.getInputProps('birth_dt')}
-                            />
-                        </DatesProvider>
-                    </GridCol>
+                <GridCol span={{ base: 12, md: 4 }}>
+                    <TextInput
+                        className={styles.full_width}
+                        withAsterisk
+                        radius={'md'}
+                        label="Apellidos"
+                        placeholder="Apellidos"
+                        key={form.key('last_name')}
+                        {...form.getInputProps('last_name')}
+                    />
                 </GridCol>
-                <GridCol span={{ base: 12 }} className={styles.form_section}>
-                    <GridCol span={{ base: 12 }} className={styles.field_row}>
+                <GridCol span={{ base: 12, md: 4 }}>
+                    <TextInput
+                        className={styles.full_width}
+                        radius={'md'}
+                        withAsterisk
+                        label="Correo electrónico"
+                        placeholder="Correo electrónico"
+                        key={form.key('email')}
+                        {...form.getInputProps('email')}
+                    />
+                </GridCol>
+                <GridCol span={{ base: 12 }}>
+                    <TextInput
+                        className={styles.full_width}
+                        radius={'md'}
+                        label="Dirección"
+                        placeholder="Dirección"
+                        key={form.key('address')}
+                        {...form.getInputProps('address')}
+                        />
+                </GridCol>
+                <GridCol span={{ base: 12, sm:6, md: 4, lg:3 }}>
+                    <TextInput
+                        className={styles.full_width}
+                        radius={'md'}
+                        withAsterisk
+                        label="Número telefónico"
+                        placeholder="Número telefónico"
+                        key={form.key('phone_number')}
+                        {...form.getInputProps('phone_number')}
+                    />
+                </GridCol>
+                <GridCol span={{ base: 12, sm:6, md: 4, lg:3 }}>
+                    <DatesProvider settings={{ locale: 'es', firstDayOfWeek: 1, weekendDays: [0],  }}>
+                        <DatePickerInput
+                            radius={'md'}
+                            withAsterisk
+                            label="Fecha de nacimiento"
+                            className={styles.full_width}
+                            key={form.key('birth_dt')}
+                            {...form.getInputProps('birth_dt')}
+                        />
+                    </DatesProvider>
+                </GridCol>
+                <GridCol span={{ base: 12, sm:6, md: 4, lg:3 }}>
                         <Select
                             className={styles.full_width}
                             radius={'md'}
@@ -205,39 +247,45 @@ const PlayerForm = ({player_info, page, player_uid} : formInterface) => {
                             key={form.key('sex')}
                             {...form.getInputProps('sex')}
                         />
-                        <Select
-                            className={styles.full_width}
-                            radius={'md'}
-                            withAsterisk
-                            label="Estado"
-                            data={estados}
-                            placeholder="Selecciona un estado"
-                            key={form.key('status')}
-                            renderOption={renderSelectOption}
-                            {...form.getInputProps('status')}
-                        />
-                        <Select
-                            className={styles.full_width}
-                            radius={'md'}
-                            label="Grupo sanguineo"
-                            data={grupos_sanguineos}
-                            placeholder="Selecciona un grupo sanguíneo"
-                            key={form.key('blood_type')}
-                            {...form.getInputProps('blood_type')}
-                        />
                     </GridCol>
-                    <GridCol span={{ base: 12 }}>
-                        <TextInput
-                            className={styles.full_width}
-                            radius={'md'}
-                            label='Enfermedades'
-                            placeholder='Enfermedades crónicas o a notar'
-                            key={form.key('enfermedad')}
-                            {...form.getInputProps('enfermedad')}
-                        />
-                    </GridCol>
+                <GridCol span={{ base: 12, sm:6, md: 4, lg:3 }}>
+                    <Select
+                        className={styles.full_width}
+                        radius={'md'}
+                        withAsterisk
+                        label="Estado"
+                        data={estados}
+                        placeholder="Selecciona un estado"
+                        key={form.key('status')}
+                        renderOption={renderSelectOption}
+                        {...form.getInputProps('status')}
+                    />
                 </GridCol>
-                <GridCol span={{ base: 12 }} className={styles.form_section}>
+                <GridCol span={{ base: 12 }}>
+                    <Text variant='gradient' fw={700} size='xl' id='info-médica'>Información médica</Text>
+                </GridCol>
+                <GridCol span={{ base: 12, md:6, lg: 4 }}>
+                    <TextInput
+                        className={styles.full_width}
+                        radius={'md'}
+                        label='Enfermedades'
+                        placeholder='Enfermedades crónicas o a notar'
+                        key={form.key('enfermedad')}
+                        {...form.getInputProps('enfermedad')}
+                    />
+                </GridCol>
+                <GridCol span={{ base: 12, md:6, lg: 4 }}>
+                    <Select
+                        className={styles.full_width}
+                        radius={'md'}
+                        label="Grupo sanguineo"
+                        data={grupos_sanguineos}
+                        placeholder="Selecciona un grupo sanguíneo"
+                        key={form.key('blood_type')}
+                        {...form.getInputProps('blood_type')}
+                    />
+                </GridCol>
+                <GridCol span={{ base: 12, md:12, lg:4 }}>
                     <div className={styles.seguro_fields}>
                         <Checkbox
                             label="Seguro"
@@ -254,6 +302,12 @@ const PlayerForm = ({player_info, page, player_uid} : formInterface) => {
                             {...form.getInputProps('insurance_name')}
                         />
                     </div>
+                </GridCol>
+                <GridCol span={{ base: 12 }}>
+                    <Text variant='gradient' fw={700} size='xl' id='otra-info'>Otra información</Text>
+                    
+                </GridCol >
+                <GridCol span={{ base: 12, md:6 }}>
                     <TextInput
                         className={styles.full_width}
                         radius={'md'}
@@ -262,6 +316,8 @@ const PlayerForm = ({player_info, page, player_uid} : formInterface) => {
                         key={form.key('afiliation')}
                         {...form.getInputProps('afiliation')}
                     />
+                </GridCol>
+                <GridCol span={{ base: 12, md:6 }}>
                     <TextInput
                         className={styles.full_width}
                         radius={'md'}
@@ -278,6 +334,8 @@ const PlayerForm = ({player_info, page, player_uid} : formInterface) => {
                         key={form.key('position')}
                         {...form.getInputProps('position')}
                     /> */}
+                </GridCol>
+                <GridCol span={{ base: 12 }}>
                     <Textarea
                         className={styles.full_width}
                         radius={'md'}
@@ -287,27 +345,31 @@ const PlayerForm = ({player_info, page, player_uid} : formInterface) => {
                         {...form.getInputProps('comment')}
                     />
                 </GridCol>
+                <GridCol span={{ base: 12 }}>
+                <Group  className={styles.butones}>
+                    <Button 
+                        component={Link}
+                        href={'/dashboard/players'}
+                        variant='subtle'
+                    >
+                        Regresar
+                    </Button>
+                    <Button
+                        disabled={ !form.isDirty() || form.submitting}
+                        loading={form.submitting}
+                        type='submit'
+                    >
+                        {
+                            page === 'edit' ?
+                                'Actualizar' : 'Crear'
+                        }
+                    </Button>
+                </Group>
+                </GridCol>
+            </Grid>
+                </GridCol>
             </Grid>
 
-            <Group justify='space-between'>
-                <Button 
-                    component={Link}
-                    href={'/dashboard/players'}
-                    variant='subtle'
-                >
-                    Regresar
-                </Button>
-                <Button
-                    disabled={ !form.isDirty() || form.submitting}
-                    loading={form.submitting}
-                    type='submit'
-                >
-                    {
-                        page === 'edit' ?
-                            'Actualizar' : 'Crear'
-                    }
-                </Button>
-            </Group>
         </form>
     )
 }

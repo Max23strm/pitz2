@@ -1,16 +1,13 @@
 "use client";
 
 import { generateColors } from "@mantine/colors-generator";
-import { MantineProvider } from "@mantine/core";
+import { createTheme, MantineProvider } from "@mantine/core";
 import React from "react";
 
 const MantineMainProvider = ({ children }: { children: React.ReactNode }) => {
 
-  return (
-    <MantineProvider
-      defaultColorScheme="auto"
-      theme={{
-        primaryColor: 'primary-pitz',
+  const theme = createTheme({
+    primaryColor: 'primary-pitz',
         defaultGradient: {from: 'indigo', to: 'primary-pitz', deg: 95},
         defaultRadius:'md',
         colors: {
@@ -18,7 +15,12 @@ const MantineMainProvider = ({ children }: { children: React.ReactNode }) => {
           "secondary-pitz": generateColors("#39BBD5"),
           "accent-pitz": generateColors("#F15A29"),
         },
-      }}
+  });
+
+  return (
+    <MantineProvider
+      defaultColorScheme="auto"
+      theme={theme}
     >
       {children}
     </MantineProvider>
