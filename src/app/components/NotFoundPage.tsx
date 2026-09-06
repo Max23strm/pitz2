@@ -1,27 +1,24 @@
 import { Button, Container, Text } from "@mantine/core";
 import Link from "next/link";
-import React from "react";
-import styles from './styles/notFount.module.css'
-import logo from '@public/images/pitz-player.png'
-import Image from "next/image";
-
-const NotFoundPage = () => {
-  return (
-    <Container className={styles.container}>
-        <Image
-            src={logo}
-            width={150}
-            alt={'not found logo'}
-        />
+import styles from "./styles/notFount.module.css";
+// import { useTranslations } from "next-intl";
+import {getTranslations} from 'next-intl/server';
+const NotFoundPage = async () => {
+    const t = await getTranslations('Alerts');
+    
+    return (
+        <Container className={styles.container}>
         <Text size="xl" fw={700}>
-            Direccion erronea o en contrucción
+            {t('not_found_title')}
         </Text>
-        <Text>Todavía no arranco esto, banquen un poco. O escriban bien la dirección</Text>
-        <Button component={Link} href={"/dashboard/home"}>
-            Volver a Inicio
-        </Button>
-    </Container>
-  );
+        <Text>
+            {t('not_found_body')}
+        </Text>
+        <Link href={"/dashboard/home"}>
+            <Button> {t('back_home')}</Button>
+        </Link>
+        </Container>
+    );
 };
 
 export default NotFoundPage;

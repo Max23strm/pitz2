@@ -2,13 +2,15 @@ import { Container } from '@mantine/core'
 import PlayerForm from '../components/PlayerForm'
 import { playersDetailResponse } from '@/interfaces/players'
 import dayjs from '@/helpers/dayjs'
+import { connection } from 'next/server';
 
 // TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
 // See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
 export const instant = false;
 
-const page = () => {
-
+const page = async () => {
+  await connection()
+  
   const playerInitialValue : playersDetailResponse = {
     address: '',
     afiliation: '',
