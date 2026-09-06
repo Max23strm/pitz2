@@ -1,4 +1,14 @@
 {
+    "Navigation":{
+        "home": "Inicio",
+        "players": "Jugadores",
+        "all": "Todos",
+        "admin": "Administración",
+        "income": "Ingresos",
+        "expenses": "Egresos / Gastos",
+        "organization": "Organización",
+        "events": "Eventos"
+    },
     "Alerts":{
         "not_found_title":"Página no encontrada",
         "not_found_body":"La página que se esta buscando no esta disponible",

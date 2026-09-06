@@ -86,3 +86,26 @@
         display: block;
     }
 }
+
+/* NAVEGACIOn */
+
+.nav_line {
+  display: none;
+  flex-direction: row;
+  gap:.5rem
+  
+}
+.nav_line a {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav_father {
+  border-radius: var(--mantine-radius-sm);
+}
+
+@media screen and (min-width: 48em) {
+  .nav_line{
+    display: flex;
+  }
+}

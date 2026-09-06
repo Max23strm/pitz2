@@ -1,111 +1,63 @@
-'use client'
+"use client";
 
-import styles from './styles/NavLink.module.css';
-import { NavLink } from '@mantine/core';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { UsersGroup, FolderKanban, FolderTwo, Home } from "@mynaui/icons-react";
-function NavBar({toogleClick} : {toogleClick: ()=>void}) {
-  const nav = [
-    {
-      name: 'Inicio',
-      href: '/dashboard/home',
-      icon: <Home size={16} stroke={1.5}/>,
-      children : []
-    },
-    {
-      name: 'Jugadores',
-      icon: <UsersGroup size={16} stroke={1.5}/>,
-      href: '/dashboard/players',
-      children : [
-        { name: 'Todos', href: '/dashboard/players' }
-      ]
-    },
-    {
-      name: 'Administración',
-      icon: <FolderTwo size={16} stroke={1.5}/>,
-      href: '/dashboard/administration',
-      children : [
-        { name: 'Ingresos', href: '/dashboard/administration/payments' },
-        { name: 'Gastos', href: '/dashboard/administration/expenses' },
-        // { name: 'Credenciales', href: '/dashboard/administration/credentials' }
-      ]
-    },
-    {
-      name: 'Organización',
-      icon: <FolderKanban size={16} stroke={1.5}/>,
-      href: '/dashboard/organization',
-      children : [
-        { name: "Calendarios", href: '/dashboard/organization/events' },
-        // { name: "Partidos", href: '/dashboard/organization/matches' },
-        // { name: "Entrenamientos", href: '/dashboard/organization/trainings' }
-      ]
-    },
-  ]
+import styles from "./styles/NavLink.module.css";
+import { NavLink } from "@mantine/core";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { defineActive, navElements } from "@/app/utils/navigation";
+import { useTranslations } from "next-intl";
+function NavBar({ toogleClick }: { toogleClick: () => void }) {
+  const pathname = usePathname();
+  const t = useTranslations("Navigation");
 
-  const pathname = usePathname()
-
-  const defineActive = (linkString : string) => {
-    if( linkString === '/' && pathname === linkString) return true
-    if( linkString !== '/' && pathname.includes(linkString)) return true
-
-    return false
-  }
-
-  if(nav.length) {
-      return (
-        <>
-          {
-            nav.map( (e, i) => {
-              
-              if(!e.children?.length) {
-                return (
-                  <NavLink
-                    key={`${e.href} - ${i} - padre`}
-                    component={Link}
-                    variant="subtle"
-                    className={styles.button}
-                    label={e.name}
-                    onClick={toogleClick}
-                    href={e.href}
-                    leftSection={e.icon}
-                    active={ defineActive(e.href) }
-                  />
-                )
-              }
-              
-              return (
-                <NavLink
-                  key={`${e.href} - ${i} - padre`}
-                  variant="subtle"
-                  label={e.name}
-                  className={styles.button}
-                  leftSection={e.icon}
-                  active={ defineActive(e.href) }
-                >
-                  {
-                    e.children.length && e.children.map( (child, index) => (
-                      <NavLink
-                        key={`${child.href} - ${i} - ${index}`}
-                        component={Link}
-                        onClick={toogleClick}
-                        variant="subtle"
-                        className={styles.button}
-                        active={ defineActive(child.href) }
-                        label={child.name}
-                        href={child.href}
-                      />
-                    ) )
-                  }
-                </NavLink>
-              )
-            })
+  if (navElements.length) {
+    return (
+      <>
+        {navElements.map((e, i) => {
+          if (!e.children?.length) {
+            return (
+              <NavLink
+                key={`${e.href} - ${i} - padre`}
+                component={Link}
+                variant="subtle"
+                className={styles.button}
+                label={t(e.name)}
+                onClick={toogleClick}
+                href={e.href}
+                leftSection={e.icon}
+                active={defineActive(e.href, pathname)}
+              />
+            );
           }
-        </>
-      );
-    }
 
+          return (
+            <NavLink
+              key={`${e.href} - ${i} - padre`}
+              variant="subtle"
+              label={t(e.name)}
+              className={styles.button}
+              active={defineActive(e.href, pathname)}
+            >
+              {e.children.length &&
+                e.children.map((child, index) => (
+                  <NavLink
+                    key={`${child.href} - ${i} - ${index}`}
+                    component={Link}
+                    onClick={toogleClick}
+                    variant="subtle"
+                    leftSection={child.icon}
+                    className={styles.button}
+                    active={defineActive(child.href, pathname)}
+                    label={t(child.name)}
+                    href={child.href}
+                  />
+                ))}
+            </NavLink>
+          );
+        })}
+      </>
+    );
   }
+}
 
-
-export default NavBar
+export default NavBar;
