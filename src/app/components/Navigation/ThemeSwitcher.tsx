@@ -1,6 +1,6 @@
 'use client'
 import { ActionIcon, useComputedColorScheme, useMantineColorScheme } from '@mantine/core'
-import { Paint } from "@mynaui/icons-react";
+import { Sun, Moon  } from "@mynaui/icons-react";
 
 const ThemeSwitcher = () => {
 
@@ -14,7 +14,9 @@ const ThemeSwitcher = () => {
             variant='transparent'
             onClick={() => setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')}
         >
-            <Paint/>
+            {
+                computedColorScheme === 'light' ? <Sun/> :<Moon/>
+            }
         </ActionIcon>
     )
 }

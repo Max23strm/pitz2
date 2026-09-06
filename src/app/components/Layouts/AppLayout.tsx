@@ -8,7 +8,6 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import NavBar from "../Navigation/NavBar";
 import TopNavBar from "../Navigation/TopNavBar";
-// import styles from '../Navigation/styles/TopNavBar.module.css'
 import styles from '@/app/components/styles/appshell.module.css'
 import BreadCrumbs from "../Navigation/BreadCrumbs";
 
@@ -22,7 +21,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
       navbar={{
         width: 210,
         breakpoint: "sm",
-        collapsed: { mobile: !opened },
+        collapsed: { mobile: !opened, desktop:!opened },
       }}
       withBorder={false}
       padding="md"
