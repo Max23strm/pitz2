@@ -4,6 +4,7 @@ import { Card, Group, Stack, Text } from '@mantine/core'
 import { CalendarCheck, Dollar,  UsersGroup, ChevronDownLeft, ChevronUpRight } from "@mynaui/icons-react";
 import dayjs from '@/helpers/dayjs'
 import styles from './Card.module.css'
+import stylesDefault from '@/app/components/styles/defaults.module.css'
 import Link from 'next/link'
 import ErrorAlert from '../InformationDisplay/ErrorAlert';
 
@@ -29,16 +30,16 @@ type Props = AmountCardProps | PlayersCardProps | EventCardProps;
 
 const StandardCard = ({ type, data }: Props) => {
     if(type === 'event' && data === null) {
-        return <Card
-            radius="lg" withBorder
-            padding="xl"
-            component={Link}
-            href="/dashboard/organization/events"
-            className={styles.mainCard}
-        >
-            <Text>Sin eventos programados</Text>
-            <CalendarCheck className={styles.heroIcon} size={'100px'} color='#0C5C7A'/>
-        </Card>
+        return <Link href="/dashboard/organization/events" className={stylesDefault.link_deco}>
+            <Card
+                radius="lg" withBorder
+                padding="xl"
+                className={styles.mainCard}
+            >
+                <Text>Sin eventos programados</Text>
+                <CalendarCheck className={styles.heroIcon} size={'100px'} color='#0C5C7A'/>
+            </Card>
+        </Link>
     }
     
     if(type === 'event' && data !== null ) {
@@ -46,12 +47,10 @@ const StandardCard = ({ type, data }: Props) => {
         if( status === '') {
             return  <ErrorAlert errorMessage={"Error obteniendo fechas"}/>
         }
-        return (
+        return ( <Link href="/dashboard/organization/events">
             <Card
                 radius="lg" withBorder
                 padding="xl"
-                component={Link}
-                href={`/dashboard/organization/events/`}
                 className={styles.mainCard}
             >
                 <Group justify='space-between'>
@@ -66,6 +65,7 @@ const StandardCard = ({ type, data }: Props) => {
                     <CalendarCheck className={styles.heroIcon} size={'100px'} color='#0C5C7A'/>
                 </Group>
             </Card>
+        </Link>
         )
 
     }
@@ -81,26 +81,22 @@ const StandardCard = ({ type, data }: Props) => {
                     <Stack gap={'lg'}>
                         <Group>
                             <Stack gap={'xs'}>
-                                <Text 
-                                    component={Link}
-                                    href={`/dashboard/administration/payments`}
-                                    fw={600} size="md" 
-                                >
-                                        Recaudado
-                                </Text>
+                                <Link href={`/dashboard/administration/payments`} className={stylesDefault.link_deco}>
+                                    <Text fw={600} size="md">
+                                            Recaudado
+                                    </Text>
+                                </Link>
                                 <Group gap={'sm'}>
                                     <Text size="lg" >{formatCurrency(data.income)}</Text>
                                     <ChevronDownLeft color='green'/>
                                 </Group>
                             </Stack>
                             <Stack gap={'xs'}>
-                                <Text 
-                                    component={Link}
-                                    href={`/dashboard/administration/expenses`}
-                                    fw={600} size="md" 
-                                >
-                                    Gastado
-                                </Text>
+                                <Link href={`/dashboard/administration/expenses`} className={stylesDefault.link_deco}>
+                                    <Text fw={600} size="md">
+                                        Gastado
+                                    </Text>
+                                </Link>
                                 <Group gap={'sm'}>
                                     <Text size="lg" >{formatCurrency(data.expense)}</Text>
                                     <ChevronUpRight color='red'/>
@@ -125,23 +121,23 @@ const StandardCard = ({ type, data }: Props) => {
     }
     if(type === 'players' ) {
         return (
-            <Card
-                radius="lg" withBorder
-                padding="xl"
-                component={Link}
-                href={`/dashboard/players`}
-                className={styles.mainCard}
-            >
-                <Group justify='space-between'>
-                    <Stack >
-                        <Text fw={600} size="md" >Jugadores activos</Text>
-                        <Stack gap={'sm'}>
-                            <Text size="lg" >{data}</Text>
+            <Link href={`/dashboard/players`} className={stylesDefault.link_deco}>
+                <Card
+                    radius="lg" withBorder
+                    padding="xl"
+                    className={styles.mainCard}
+                >
+                    <Group justify='space-between'>
+                        <Stack >
+                            <Text fw={600} size="md" >Jugadores activos</Text>
+                            <Stack gap={'sm'}>
+                                <Text size="lg" >{data}</Text>
+                            </Stack>
                         </Stack>
-                    </Stack>
-                    <UsersGroup className={styles.heroIcon} size={'100px'} color='#0C5C7A'/>
-                </Group>
-            </Card>
+                        <UsersGroup className={styles.heroIcon} size={'100px'} color='#0C5C7A'/>
+                    </Group>
+                </Card>
+            </Link>
         )
 
     }

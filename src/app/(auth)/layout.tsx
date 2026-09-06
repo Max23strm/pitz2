@@ -9,11 +9,15 @@ export const instant = false;
 const layout = ({children} : { children: ReactNode }) => {
     return (
         <div className={styles.login_container}>
-            <Paper className={styles.form_section} radius={'xl'}>
+            <div className={styles.welcome_image}/>
+            <div className={styles.welcome_filter}/>
+            
+            
+            {/* <Paper className={styles.form_section} radius={'xl'}> */}
                 {children}
-            </Paper>
-            <div className={styles.wrapper}>
-            </div>
+            {/* </Paper> */}
+            {/* <div className={styles.wrapper}>
+            </div> */}
         </div>
     )
 }

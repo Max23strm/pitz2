@@ -28,7 +28,16 @@
       ],
       "@public/*": [
         "./public/*"
-      ]
+      ],
+      "@components/*": [
+        "./src/app/components"
+      ],
+      "@helpers/*": [
+        "./src/helpers"
+      ],
+      "@types/*": [
+        "./src/interfaces"
+      ],
     }
   },
   "include": [

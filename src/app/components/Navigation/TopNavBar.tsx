@@ -3,7 +3,7 @@ import React from 'react'
 import PitzLogo from '../../../../public/images/pitz-player.png'
 import Link from 'next/link'
 import { Burger } from '@mantine/core'
-import styles from './styles/TopNavBar.module.css'
+import styles from '@/app/components/styles/appshell.module.css'
 import ThemeSwitcher from './ThemeSwitcher'
 import UserAvatar from './UserAvatar'
 

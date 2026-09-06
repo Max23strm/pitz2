@@ -1,0 +1,94 @@
+.main_sections {
+    display: flex;
+    flex-direction: column;
+    min-width: 100dvw;
+    min-height: 100dvh;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+}
+
+
+.login_card{
+    max-width: 700px;
+    width: 50dvw;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    justify-content: center;
+    align-items: center;
+}
+.login_form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.input_container{
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+}
+.input{
+    width: 100%;
+}
+
+/* ---------------------------- */
+
+
+/* .logo{
+    margin: auto;
+} */
+
+
+.form_section {
+    border-right: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-7));
+    height: fit-content;
+    position: absolute ;
+    max-width: 500px;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    width: 90dvw;
+    padding: 30px;
+    padding-top: 40px;
+    border-radius: 2rem;
+    @media (min-width: 1020px) {
+        max-height:600px;
+        max-height: unset;
+        max-width: unset;
+        position: initial ;
+        top: 0;
+        left: 0;
+        height: 100dvh;
+        padding: 0;
+        transform: unset
+    }
+}
+
+.title {
+  color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+  text-align: center;
+  margin-top: var(--mantine-spacing-md);
+  margin-bottom: 20px;
+}
+
+.action_buttons_section{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: .5rem
+}
+
+:global([data-mantine-color-scheme="dark"]) .login_container .welcome_image {
+    background-image: url('/images/sunset.webp');
+}

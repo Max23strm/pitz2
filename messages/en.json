@@ -1,0 +1,17 @@
+{
+    "Authentication": {
+        "title": "Welcome!",
+        "invalid_user": "Invalid user",
+        "invalid_length": "Invalid length",
+        "loged_successfully": "Loged in successfully",
+        "email_address": "Username / Email address",
+        "insert_email_address": "Insert your username or email address",
+        "user": "User",
+        "password": "Password",
+        "insert_password": "Insert your password",
+        "log_in": "Log in",
+        "i_forgot_password": "Forgot my password",
+        "error_loggin_in" : "Error logging in",
+        "validate_credentials" : "Validate your credentials"
+    }
+}
