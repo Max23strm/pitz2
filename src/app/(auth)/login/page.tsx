@@ -1,12 +1,19 @@
 import React from "react";
 import LoginCard from "./components/LoginCard";
+import styles from '../styles/Authentication.module.css'
+// import styles from '../styles/Authentication.module.css'
+
 
 // TODO: Cache Components adoption. Refactor this route so this opt-out can be removed.
 // See: https://nextjs.org/docs/app/guides/migrating-to-cache-components
 export const instant = false;
 
 const page = () => {
-  return <LoginCard/>;
+
+  // return <>asd</>
+  return <div className={styles.main_sections}>
+      <LoginCard/>
+    </div>
 };
 
 export default page;

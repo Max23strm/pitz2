@@ -1,0 +1,17 @@
+{
+    "Authentication": {
+        "title": "¡Bienvenido!",
+        "invalid_user": "Usuario no válido",
+        "invalid_length": "Longitud no válida",
+        "loged_successfully": "Sesión iniciada correctamente",
+        "email_address": "Correo electrónico",
+        "insert_email_address": "Ingrese su correo electrónico",
+        "user": "Usuario",
+        "password": "Contraseña",
+        "insert_password": "Ingrese su contraseña",
+        "log_in": "Iniciar sesión",
+        "i_forgot_password": "Olvidé mi contraseña",
+        "error_loggin_in" : "Error iniciando sesión",
+        "validate_credentials" : "Valide sus credenciales"
+    }
+}

@@ -2,7 +2,7 @@ import { Grid, GridCol, Skeleton } from '@mantine/core'
 
 const LoadingComponents = () => {
     return (
-        <Grid gutter={{base: 12}}>
+        <Grid gap={{base: 12}}>
             <GridCol span={{ base: 12, md:5, lg:3 }}>
                 <Skeleton width={'100%'} height={'100%'}/>
             </GridCol>

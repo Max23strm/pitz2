@@ -8,7 +8,8 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import NavBar from "../Navigation/NavBar";
 import TopNavBar from "../Navigation/TopNavBar";
-import styles from '../Navigation/styles/TopNavBar.module.css'
+// import styles from '../Navigation/styles/TopNavBar.module.css'
+import styles from '@/app/components/styles/appshell.module.css'
 import BreadCrumbs from "../Navigation/BreadCrumbs";
 
 
@@ -26,6 +27,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
       withBorder={false}
       padding="md"
     >
+      <span className={styles.main_section_decoration}></span>
       <AppShellHeader className={styles.header_con_logo}>
         <TopNavBar opened={opened} onClick={toggle} />
       </AppShellHeader>
@@ -34,7 +36,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
         <NavBar toogleClick={close}/>
       </AppShellNavbar>
 
-      <AppShellMain>
+      <AppShellMain className={styles.main_section}>
         <BreadCrumbs/>
         {children}
       </AppShellMain>

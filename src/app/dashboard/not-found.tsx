@@ -6,12 +6,12 @@ export default function NotFound() {
     <Container fluid>
       <Text size="xl" fw={700}>Direccion erronea o en contrucción</Text>
       <Text>Todavía no arranco esto, banquen un poco</Text>
-      <Button 
-        component={Link}
-        href={"/home"}
-      >
-        Volver a Inicio
-      </Button>
+      <Link href={'/home'}>
+        <Button 
+        >
+          Volver a Inicio
+        </Button>
+      </Link>
     </Container>
   )
 }

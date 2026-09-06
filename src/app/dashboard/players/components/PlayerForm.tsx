@@ -132,7 +132,7 @@ const PlayerForm = ({player_info, page, player_uid} : formInterface) => {
 
     return (
         <form onSubmit={form.onSubmit(handlePromise)} className={styles.form}> 
-            <Grid gutter={{base: 12}} className={styles.fields}>
+            <Grid gap={{base: 12}} className={styles.fields}>
                 <GridCol span={{ base: 12, md:5, lg:3 }}>
                     <Card className={styles.tabs_section} style={{background: status === '0' ? 'linear-gradient(145deg, var(--mantine-color-indigo-filled) 0%, var(--mantine-color-accent-pitz-filled) 100%)' : 'linear-gradient(145deg, var(--mantine-color-indigo-filled) 0%, var(--mantine-color-primary-pitz-filled) 100%)'}} radius={'lg'}>
                         <Avatar className={styles.image} variant='gradient' gradient={{ from: sex === 'Mujer' ? 'red' :'indigo', to: 'primary-pitz', deg: 135 }}/>
@@ -166,7 +166,7 @@ const PlayerForm = ({player_info, page, player_uid} : formInterface) => {
                     </Card>    
                 </GridCol>
             <GridCol span={{ base: 12, md:7, lg:9 }}>
-            <Grid gutter={{base: 12}} className={styles.fields}>
+            <Grid gap={{base: 12}} className={styles.fields}>
                 <GridCol span={{ base: 12 }}>
                     <Text variant='gradient' fw={700} size='xl' id='info-básica'>Información básica</Text>
                 </GridCol>
