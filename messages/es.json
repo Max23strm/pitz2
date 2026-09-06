@@ -1,4 +1,9 @@
 {
+    "Alerts":{
+        "not_found_title":"Página no encontrada",
+        "not_found_body":"La página que se esta buscando no esta disponible",
+        "back_home":"Regresar a pantalla principal"
+    },
     "Authentication": {
         "title": "¡Bienvenido!",
         "invalid_user": "Usuario no válido",

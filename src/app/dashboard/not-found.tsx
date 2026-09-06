@@ -1,17 +1,9 @@
+"use server"
 import { Button, Container, Text } from '@mantine/core'
 import Link from 'next/link'
+// import NotFoundPage from '../components/NotFoundPage'
+import NotFoundPage from '@/app/components/NotFoundPage'
  
-export default function NotFound() {
-  return (
-    <Container fluid>
-      <Text size="xl" fw={700}>Direccion erronea o en contrucción</Text>
-      <Text>Todavía no arranco esto, banquen un poco</Text>
-      <Link href={'/home'}>
-        <Button 
-        >
-          Volver a Inicio
-        </Button>
-      </Link>
-    </Container>
-  )
+export default async function NotFound() {
+  return <NotFoundPage/>
 }
